@@ -1,19 +1,62 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "flowbite";
+
+@theme {
+  --color-primary-50: #fff9e6;
+  --color-primary-100: #fff0c2;
+  --color-primary-200: #ffe699;
+  --color-primary-300: #ffd970;
+  --color-primary-400: #ffcc47;
+  --color-primary-500: #ffbf1e;
+  --color-primary-600: #d4af37;
+  --color-primary-700: #b8941f;
+  --color-primary-800: #9a7a19;
+  --color-primary-900: #7c6013;
+}
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+  
+  #root {
+    @apply max-w-screen-xl mx-auto px-8 py-8 text-center;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
   
   .card {
     @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  }
+  
+  .logo {
+    @apply h-24 p-6 transition-all duration-300 will-change-[filter];
+  }
+  
+  .logo:hover {
+    @apply drop-shadow-[0_0_2em_rgba(100,108,255,0.67)];
+  }
+  
+  .logo.react:hover {
+    @apply drop-shadow-[0_0_2em_rgba(97,218,251,0.67)];
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
