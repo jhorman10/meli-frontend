@@ -11,7 +11,7 @@ import type { ProductDetailsDTO } from '../dto/ProductDTO';
 export class ProductService {
   private getProductByIdUseCase: GetProductById;
 
-  constructor(private productRepository: ProductRepository) {
+  constructor(productRepository: ProductRepository) {
     this.getProductByIdUseCase = new GetProductById(productRepository);
   }
 

@@ -14,7 +14,7 @@ import type { SearchResultDTO, SearchParamsDTO } from '../dto/SearchResultDTO';
 export class SearchService {
   private searchProductsUseCase: SearchProducts;
 
-  constructor(private productRepository: ProductRepository) {
+  constructor(productRepository: ProductRepository) {
     this.searchProductsUseCase = new SearchProducts(productRepository);
   }
 
