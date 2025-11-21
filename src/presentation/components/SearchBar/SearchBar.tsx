@@ -27,7 +27,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto w-[90%] md:w-[70%]">
+    <form onSubmit={handleSubmit} className="mx-auto w-[95%] md:w-[70%]">
       <div className="relative">
         <input
           type="text"
