@@ -2,16 +2,18 @@
 @import 'flowbite';
 
 @theme {
-  --color-primary-50: #fff9e6;
-  --color-primary-100: #fff0c2;
-  --color-primary-200: #ffe699;
-  --color-primary-300: #ffd970;
-  --color-primary-400: #ffcc47;
-  --color-primary-500: #ffbf1e;
-  --color-primary-600: #d4af37;
-  --color-primary-700: #b8941f;
-  --color-primary-800: #9a7a19;
-  --color-primary-900: #7c6013;
+  --color-primary-50: #e8f4ff;
+  --color-primary-100: #d1e9ff;
+  --color-primary-200: #a3d3ff;
+  --color-primary-300: #75bdff;
+  --color-primary-400: #4aa3ff;
+  --color-primary-500: #3483fa;
+  --color-primary-600: #2968c8;
+  --color-primary-700: #1f4e96;
+  --color-primary-800: #153464;
+  --color-primary-900: #0a1a32;
+  --color-accent-yellow: #ffe600;
+  --color-accent-yellow-dark: #fff159;
 }
 
 @layer base {
