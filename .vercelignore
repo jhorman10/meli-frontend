@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Production
+dist
+dist-ssr
+
+# Misc
+.DS_Store
+*.local
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage
+.jest
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Build artifacts
+*.tsbuildinfo

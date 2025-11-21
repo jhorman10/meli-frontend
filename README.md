@@ -83,3 +83,34 @@ src/
 ├── main.tsx          # Entry point
 └── vite-env.d.ts     # Vite types
 ```
+
+## 🚢 Deployment
+
+### Vercel
+
+This project is fully configured for deployment on Vercel with MSW (Mock Service Worker) support in production.
+
+#### Quick Deploy
+
+1. Push your code to GitHub
+2. Import project in [Vercel Dashboard](https://vercel.com/dashboard)
+3. Configure environment variables:
+   - `VITE_ENABLE_MOCKS=true`
+   - `VITE_API_URL=http://localhost:3001`
+4. Deploy!
+
+For detailed instructions, see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
+
+### Environment Variables
+
+| Variable            | Description        | Example                 |
+| ------------------- | ------------------ | ----------------------- |
+| `VITE_API_URL`      | API base URL       | `http://localhost:3001` |
+| `VITE_ENABLE_MOCKS` | Enable MSW mocking | `true` or `false`       |
+
+### Preview Production Build
+
+```bash
+npm run build
+npm run preview
+```
