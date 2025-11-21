@@ -13,8 +13,12 @@ import type {
 export class ProductAPI implements ProductRepository {
   private baseURL: string;
 
-  constructor(baseURL: string = import.meta.env.VITE_API_URL || '/api') {
+  constructor(
+    baseURL: string = (import.meta.env.VITE_API_URL as string) ||
+      'http://localhost:3001'
+  ) {
     this.baseURL = baseURL;
+    console.debug('[ProductAPI] Initialized with baseURL:', this.baseURL);
   }
 
   async search(params: SearchParams): Promise<SearchResult> {
@@ -29,32 +33,43 @@ export class ProductAPI implements ProductRepository {
       url.searchParams.set('offset', params.offset.toString());
     }
 
-    const response = await fetch(url.toString());
-    await new Promise((r) => setTimeout(r, 500));
+    try {
+      const response = await fetch(url.toString());
+      await new Promise((r) => setTimeout(r, 500));
 
-    if (!response.ok) {
-      throw new Error(`Error al buscar productos: ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`Error al buscar productos: ${response.statusText}`);
+      }
+
+      const data: MeliSearchResponse = await response.json();
+
+      return {
+        products: data.results.map((item) => this.mapToProduct(item)),
+        total: data.paging?.total ?? 0,
+        query: data.query,
+      };
+    } catch (error) {
+      console.error('[ProductAPI] Search failed:', error);
+      throw error;
     }
-
-    const data: MeliSearchResponse = await response.json();
-
-    return {
-      products: data.results.map((item) => this.mapToProduct(item)),
-      total: data.paging?.total ?? 0,
-      query: data.query,
-    };
   }
 
   async getById(id: string): Promise<ProductDetails> {
-    const response = await fetch(`${this.baseURL}/items/${id}`);
-    await new Promise((r) => setTimeout(r, 500));
+    const url = `${this.baseURL}/items/${id}`;
+    try {
+      const response = await fetch(url);
+      await new Promise((r) => setTimeout(r, 500));
 
-    if (!response.ok) {
-      throw new Error(`Error al obtener producto: ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`Error al obtener producto: ${response.statusText}`);
+      }
+
+      const data: MeliProductDetail = await response.json();
+      return this.mapToProductDetails(data);
+    } catch (error) {
+      console.error('[ProductAPI] GetById failed for:', id, error);
+      throw error;
     }
-
-    const data: MeliProductDetail = await response.json();
-    return this.mapToProductDetails(data);
   }
 
   private mapToProduct(data: MeliSearchItem | MeliProductDetail): Product {
