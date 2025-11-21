@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getProductService } from '@/application/di/providers';
 import type { ProductDetailsDTO } from '@/application/dto/ProductDTO';
+import { ERROR_MESSAGES } from '@/shared/constants';
 
 /**
  * Custom hook that encapsulates all product‑detail page logic:
@@ -24,7 +25,7 @@ export const useProductDetailPage = (productId: string) => {
   useEffect(() => {
     const fetchProduct = async () => {
       if (!productId) {
-        setError(new Error('ID de producto inválido'));
+        setError(new Error(ERROR_MESSAGES.PRODUCT.INVALID_ID));
         setIsLoading(false);
         return;
       }
@@ -35,7 +36,9 @@ export const useProductDetailPage = (productId: string) => {
         setProduct(details);
         setSelectedImage(details.pictures[0]?.url || details.thumbnail);
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('Error desconocido'));
+        setError(
+          err instanceof Error ? err : new Error(ERROR_MESSAGES.PRODUCT.UNKNOWN)
+        );
       } finally {
         setIsLoading(false);
       }

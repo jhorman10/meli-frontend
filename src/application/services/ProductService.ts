@@ -2,6 +2,7 @@ import type { ProductRepository } from '@/domain/repositories/ProductRepository'
 import { GetProductById } from '@/domain/use-cases/GetProductById';
 import { ProductMapper } from '../mappers/ProductMapper';
 import type { ProductDetailsDTO } from '../dto/ProductDTO';
+import { ERROR_MESSAGES } from '@/shared/constants';
 
 /**
  * ProductService
@@ -26,9 +27,11 @@ export class ProductService {
     } catch (error) {
       // Transform domain errors to application-level errors
       if (error instanceof Error) {
-        throw new Error(`Error al obtener el producto: ${error.message}`);
+        throw new Error(
+          `${ERROR_MESSAGES.PRODUCT.FETCH_ERROR}: ${error.message}`
+        );
       }
-      throw new Error('Error desconocido al obtener el producto');
+      throw new Error(ERROR_MESSAGES.PRODUCT.UNKNOWN_ERROR);
     }
   }
 }

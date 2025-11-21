@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductList } from '@/presentation/components/ProductList/ProductList';
 import { useSearchResultsPage } from '@/application/hooks/useSearchResultsPage';
+import { UI_STRINGS } from '@/shared/constants';
 
 export const SearchResultsPage: React.FC = () => {
   const {
@@ -18,7 +19,7 @@ export const SearchResultsPage: React.FC = () => {
       {query && (
         <div className="mb-8">
           <div className="flex flex-wrap gap-2">
-            <p> Búsquedas relacionadas:</p>
+            <p> {UI_STRINGS.SEARCH.RELATED_SEARCHES}</p>
             {relatedSearches.map((term, index) => (
               <React.Fragment key={term}>
                 {index > 0 && <span className="text-gray-400">|</span>}
@@ -52,7 +53,7 @@ export const SearchResultsPage: React.FC = () => {
             </svg>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-red-800">
-                Error al buscar productos
+                {UI_STRINGS.SEARCH.ERROR_TITLE}
               </h3>
               <p className="text-sm text-red-700">{error.message}</p>
             </div>

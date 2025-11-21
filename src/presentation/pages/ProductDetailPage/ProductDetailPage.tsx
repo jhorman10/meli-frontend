@@ -8,6 +8,7 @@ import {
   calculatePriceWithoutTax,
 } from '@/shared/utils';
 import { useProductDetailPage } from '@/application/hooks/useProductDetailPage';
+import { UI_STRINGS } from '@/shared/constants';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,10 +28,12 @@ export const ProductDetailPage: React.FC = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Error</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            {UI_STRINGS.COMMON.ERROR}
+          </h1>
           <p className="text-gray-600 mb-4">{error.message}</p>
           <Link to="/" className="text-blue-600 underline">
-            Volver al inicio
+            {UI_STRINGS.COMMON.BACK_TO_HOME}
           </Link>
         </div>
       </div>
@@ -42,10 +45,10 @@ export const ProductDetailPage: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Producto no encontrado
+            {UI_STRINGS.PRODUCT_DETAIL.NOT_FOUND}
           </h1>
           <Link to="/" className="text-blue-600 underline">
-            Volver al inicio
+            {UI_STRINGS.COMMON.BACK_TO_HOME}
           </Link>
         </div>
       </div>
@@ -60,7 +63,8 @@ export const ProductDetailPage: React.FC = () => {
     <div className="max-w-6xl mx-auto p-4">
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 mb-4">
-        <span>Inicio</span> &gt; <span>Productos</span> &gt;{' '}
+        <span>{UI_STRINGS.PRODUCT_DETAIL.BREADCRUMB.HOME}</span> &gt;{' '}
+        <span>{UI_STRINGS.PRODUCT_DETAIL.BREADCRUMB.PRODUCTS}</span> &gt;{' '}
         <span>{product.title.split(' ')[0]}</span>
       </div>
 
@@ -109,11 +113,13 @@ export const ProductDetailPage: React.FC = () => {
           {/* Product Status */}
           <div className="mb-4">
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              {product.condition === 'new' ? 'Nuevo' : 'Usado'}
+              {product.condition === 'new'
+                ? UI_STRINGS.PRODUCT_DETAIL.STATUS.NEW
+                : UI_STRINGS.PRODUCT_DETAIL.STATUS.USED}
             </span>
             {product.soldQuantity > 0 && (
               <span className="text-gray-600 text-sm ml-2">
-                {product.soldQuantity} vendidos
+                {product.soldQuantity} {UI_STRINGS.PRODUCT_DETAIL.STATUS.SOLD}
               </span>
             )}
           </div>
@@ -153,7 +159,7 @@ export const ProductDetailPage: React.FC = () => {
               </span>
               {discount > 0 && (
                 <span className="ml-2 text-green-600 font-medium">
-                  {discount}% OFF
+                  {discount}% {UI_STRINGS.COMMON.OFF}
                 </span>
               )}
             </div>
@@ -164,14 +170,16 @@ export const ProductDetailPage: React.FC = () => {
             )}
             {product.installments && (
               <div className="text-gray-600 mt-2">
-                Mismo precio en {product.installments.quantity} cuotas de{' '}
+                {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
+                {product.installments.quantity}{' '}
+                {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
                 <span className="font-medium">
                   {formatPrice(product.installments.amount, product.currency)}
                 </span>
               </div>
             )}
             <div className="text-gray-600 mt-1">
-              Precio sin impuestos nacionales:{' '}
+              {UI_STRINGS.PRODUCT_DETAIL.PRICING.PRICE_WITHOUT_TAX}{' '}
               <span className="font-medium">
                 {formatPrice(
                   calculatePriceWithoutTax(product.price),
@@ -187,7 +195,7 @@ export const ProductDetailPage: React.FC = () => {
               type="button"
               className="text-blue-600 hover:underline text-sm font-medium"
             >
-              Ver los medios de pago
+              {UI_STRINGS.PRODUCT_DETAIL.PAYMENT_METHODS.VIEW}
             </button>
           </div>
 
@@ -209,12 +217,14 @@ export const ProductDetailPage: React.FC = () => {
                   />
                 </svg>
                 <div>
-                  <h3 className="font-medium">Llega gratis hoy</h3>
+                  <h3 className="font-medium">
+                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.FREE_TODAY}
+                  </h3>
                   <p className="text-sm text-gray-600">
-                    Solo en CABA y zonas de GBA
+                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.ONLY_IN_CABA}
                   </p>
                   <p className="text-sm text-gray-600">
-                    Comprando dentro de las próximas 2h 27 min
+                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.BUY_WITHIN}
                   </p>
                 </div>
               </div>
@@ -240,13 +250,13 @@ export const ProductDetailPage: React.FC = () => {
                 </svg>
                 <div>
                   <h3 className="font-medium">
-                    Retirá gratis a partir del jueves en correos y otros puntos
+                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.FREE_PICKUP}
                   </h3>
                   <button
                     type="button"
                     className="text-blue-600 hover:underline text-sm font-medium mt-1"
                   >
-                    Ver en el mapa
+                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.VIEW_MAP}
                   </button>
                 </div>
               </div>
@@ -255,10 +265,12 @@ export const ProductDetailPage: React.FC = () => {
 
           {/* Stock */}
           <div className="mb-6">
-            <p className="font-medium mb-2">Stock disponible</p>
+            <p className="font-medium mb-2">
+              {UI_STRINGS.PRODUCT_DETAIL.STOCK.AVAILABLE}
+            </p>
             <div className="flex items-center gap-2 flex-wrap">
               <label htmlFor="quantity" className="text-gray-600">
-                Cantidad:
+                {UI_STRINGS.PRODUCT_DETAIL.STOCK.QUANTITY}
               </label>
               <select
                 id="quantity"
@@ -269,13 +281,17 @@ export const ProductDetailPage: React.FC = () => {
                 {[...Array(Math.min(product.availableQuantity, 10))].map(
                   (_, i) => (
                     <option key={i + 1} value={i + 1}>
-                      {i + 1} {i === 0 ? 'unidad' : 'unidades'}
+                      {i + 1}{' '}
+                      {i === 0
+                        ? UI_STRINGS.PRODUCT_DETAIL.STOCK.UNIT
+                        : UI_STRINGS.PRODUCT_DETAIL.STOCK.UNITS}
                     </option>
                   )
                 )}
               </select>
               <span className="text-gray-600">
-                ({product.availableQuantity} disponibles)
+                ({product.availableQuantity}{' '}
+                {UI_STRINGS.PRODUCT_DETAIL.STOCK.AVAILABLE_COUNT})
               </span>
             </div>
           </div>
@@ -286,13 +302,13 @@ export const ProductDetailPage: React.FC = () => {
               type="button"
               className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
-              Comprar ahora
+              {UI_STRINGS.PRODUCT_DETAIL.ACTIONS.BUY_NOW}
             </button>
             <button
               type="button"
               className="px-6 py-3 bg-blue-100 text-blue-600 font-medium rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
-              Agregar al carrito
+              {UI_STRINGS.PRODUCT_DETAIL.ACTIONS.ADD_TO_CART}
             </button>
           </div>
         </div>
@@ -301,13 +317,17 @@ export const ProductDetailPage: React.FC = () => {
       {/* Product Description */}
       {product.description?.plainText && (
         <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl font-bold mb-4">Descripción</h2>
+          <h2 className="text-xl font-bold mb-4">
+            {UI_STRINGS.PRODUCT_DETAIL.DESCRIPTION.TITLE}
+          </h2>
           <p className="text-gray-700 mb-4 whitespace-pre-line">
             {product.description.plainText}
           </p>
           {product.attributes && product.attributes.length > 0 && (
             <div className="border-t border-gray-200 mt-4 pt-4">
-              <h3 className="font-medium mb-2">Características principales:</h3>
+              <h3 className="font-medium mb-2">
+                {UI_STRINGS.PRODUCT_DETAIL.DESCRIPTION.FEATURES}
+              </h3>
               <ul className="list-disc list-inside text-gray-700 space-y-1">
                 {product.attributes.slice(0, 6).map((attr) => (
                   <li key={attr.id}>

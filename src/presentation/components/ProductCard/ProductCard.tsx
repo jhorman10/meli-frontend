@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import type { ProductDTO } from '@/application/dto/ProductDTO';
+import { UI_STRINGS } from '@/shared/constants';
 
 interface ProductCardProps {
   product: ProductDTO;
@@ -28,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.title.toLowerCase().includes('apple') && (
             <div className="mb-2">
               <span className="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">
-                APPLE
+                {UI_STRINGS.PRODUCT_CARD.APPLE_BADGE}
               </span>
             </div>
           )}
@@ -52,7 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                   {product.formattedOriginalPrice}
                 </span>
                 <span className="px-1.5 py-0.5 text-xs font-semibold text-green-700 bg-green-100 rounded">
-                  {product.discountPercentage}% OFF
+                  {product.discountPercentage}% {UI_STRINGS.COMMON.OFF}
                 </span>
               </>
             )}
@@ -86,7 +87,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* Installments */}
           {product.installments && (
             <p className="text-sm text-gray-700 mb-1">
-              Mismo precio en {product.installments.quantity} cuotas de{' '}
+              {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
+              {product.installments.quantity}{' '}
+              {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
               {product.installments.formattedAmount}
             </p>
           )}
@@ -107,7 +110,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                   d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
                 />
               </svg>
-              <span className="font-medium">Envío gratis</span>
+              <span className="font-medium">
+                {UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING}
+              </span>
             </div>
           )}
         </div>

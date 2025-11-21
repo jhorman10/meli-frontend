@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSearchBar } from '@/application/hooks/useSearchBar';
+import { UI_STRINGS } from '@/shared/constants';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -11,7 +12,7 @@ interface SearchBarProps {
 export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
   isLoading = false,
-  placeholder = 'Buscar productos...',
+  placeholder = UI_STRINGS.SEARCH.PLACEHOLDER,
   initialValue = '',
 }) => {
   const { query, setQuery, handleSubmit } = useSearchBar({
