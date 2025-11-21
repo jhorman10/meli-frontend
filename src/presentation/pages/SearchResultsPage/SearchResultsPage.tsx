@@ -71,19 +71,6 @@ export const SearchResultsPage: React.FC = () => {
           </div>
         </div>
       )}
-
-      {results && (
-        <div className="mb-6">
-          <p className="text-gray-600">
-            Mostrando resultados para:{' '}
-            <span className="font-semibold">"{results.query}"</span>
-            <span className="ml-2 text-sm text-gray-500">
-              ({results.total.toLocaleString()} resultados)
-            </span>
-          </p>
-        </div>
-      )}
-
       <ProductList products={results?.products || []} isLoading={isLoading} />
     </div>
   );
