@@ -9,7 +9,9 @@ async function initializeMSW() {
   try {
     await worker.start({
       onUnhandledRequest: 'bypass',
-      serviceWorkerUrl: '/mockServiceWorker.js',
+      serviceWorker: {
+        url: '/mockServiceWorker.js',
+      },
     });
   } catch (error) {
     console.error('MSW failed to start:', error);
