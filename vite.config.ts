@@ -9,12 +9,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  server: {
-    port: 5173,
-  },
   build: {
     outDir: 'dist',
     sourcemap: false,
   },
-  publicDir: 'public',
+  server: {
+    middlewareMode: false,
+  },
 });
