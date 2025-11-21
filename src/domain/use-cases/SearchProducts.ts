@@ -1,4 +1,3 @@
-// import { SearchProducts as SearchProductsUseCase } from "@/domain/use-cases/SearchProducts";
 import type {
   ProductRepository,
   SearchParams,
@@ -9,6 +8,7 @@ export class SearchProducts {
   constructor(private productRepository: ProductRepository) {}
 
   async execute(params: SearchParams): Promise<SearchResult> {
+    // Validate query
     if (!params.query.trim()) {
       throw new Error('La búsqueda no puede estar vacía');
     }
@@ -17,6 +17,14 @@ export class SearchProducts {
       throw new Error('La búsqueda debe tener al menos 3 caracteres');
     }
 
-    return this.productRepository.search(params);
+    // Set default pagination
+    const searchParams: SearchParams = {
+      ...params,
+      limit: params.limit || 20,
+      offset: params.offset || 0,
+    };
+
+    // Execute search
+    return this.productRepository.search(searchParams);
   }
 }
