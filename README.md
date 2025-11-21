@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# Mercado Libre Frontend Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a frontend application based on the Mercado Libre product search experience. It was built using React, TypeScript, and Vite, following Clean Architecture principles.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## React Compiler
+- Node.js (v18 or higher)
+- Yarn (v1.22 or higher)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
 
-## Expanding the ESLint configuration
+1. Clone the repository:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   git clone <repository-url>
+   cd meli-frontend
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Install dependencies:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   yarn install
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Set up environment variables:
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   The default `VITE_API_URL` is `http://localhost:3001` which corresponds to the MSW mock server.
+
+4. Start the development server:
+
+   ```bash
+   yarn dev
+   ```
+
+5. Open your browser at `http://localhost:5173`.
+
+## 🛠 Technical Decisions
+
+### Architecture
+
+The project follows **Clean Architecture** principles to ensure scalability and maintainability:
+
+- **Domain**: Contains business entities and use case interfaces. It is independent of any framework.
+- **Application**: Contains use case implementations and application logic.
+- **Infrastructure**: Handles external concerns like API calls (using Axios) and Mock Service Worker (MSW).
+- **Presentation**: Contains React components, pages, and hooks.
+
+### State Management
+
+- **React Hooks**: Used for local state management (`useState`, `useEffect`, custom hooks).
+- **Context API**: Not used for this scope, but could be added for global state (e.g., user session, cart).
+
+### Styling
+
+- **Tailwind CSS**: Chosen for rapid UI development and ease of customization. It allows for a clean and consistent design system.
+
+### Mocking
+
+- **Mock Service Worker (MSW)**: Used to intercept API requests and return mock data. This allows the frontend to be developed and tested independently of a real backend.
+
+## 📝 What I would do differently (with more time)
+
+- **Testing**: Implement unit tests for use cases and components using Jest and React Testing Library. Add integration tests for critical flows.
+- **SEO**: Implement Server-Side Rendering (SSR) or Static Site Generation (SSG) using Next.js for better SEO performance, as product pages are critical for search engines.
+- **Error Handling**: Implement a more robust error handling strategy, perhaps with a global error boundary and toast notifications.
+- **Accessibility**: Further improve accessibility by auditing with tools like Lighthouse and adding ARIA labels where necessary.
+- **Performance**: Optimize image loading (lazy loading, next-gen formats) and bundle size.
+
+## 📂 Project Structure
+
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+src/
+├── application/        # Application business rules
+├── domain/            # Enterprise business rules
+├── infrastructure/    # Frameworks & Drivers
+├── presentation/      # Interface Adapters (UI)
+├── main.tsx          # Entry point
+└── vite-env.d.ts     # Vite types
 ```

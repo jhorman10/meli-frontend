@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "flowbite";
+@import 'tailwindcss';
+@import 'flowbite';
 
 @theme {
   --color-primary-50: #fff9e6;
@@ -20,7 +20,7 @@
   }
 
   #root {
-    @apply max-w-screen-xl mx-auto px-8 py-8 text-center;
+    @apply mx-auto text-center;
   }
 }
 
@@ -57,6 +57,20 @@
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
