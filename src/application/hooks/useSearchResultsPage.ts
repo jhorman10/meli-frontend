@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useSearchProducts } from '@/application/hooks/useSearchProducts';
 
 export const useSearchResultsPage = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const { search, results, isLoading, error } = useSearchProducts();
 
@@ -24,7 +24,7 @@ export const useSearchResultsPage = () => {
   ];
 
   const handleRelatedSearch = (term: string) => {
-    search(term);
+    setSearchParams({ q: term });
   };
 
   return {
