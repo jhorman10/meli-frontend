@@ -33,7 +33,7 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "@vite_api_url",
-    "VITE_ENABLE_MOCKS": "@vite_enable_mocks"
+    "VITE_API_URL": "http://localhost:3001",
+    "VITE_ENABLE_MOCKS": "true"
   }
 }
