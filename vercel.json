@@ -33,9 +33,7 @@
     }
   ],
   "env": {
-    "VITE_API_URL": {
-      "description": "Mock API URL - used by Mock Service Worker",
-      "example": "http://localhost:3001"
-    }
+    "VITE_API_URL": "@vite_api_url",
+    "VITE_ENABLE_MOCKS": "@vite_enable_mocks"
   }
 }
