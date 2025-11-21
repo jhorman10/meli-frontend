@@ -1,11 +1,41 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "buildCommand": "yarn build",
+  "devCommand": "yarn dev",
+  "installCommand": "yarn install",
   "framework": "vite",
-  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/mockServiceWorker.js",
+      "destination": "/mockServiceWorker.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/mockServiceWorker.js",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "env": {
-    "VITE_ENABLE_MOCKS": "true",
-    "VITE_API_URL": "http://localhost:3001"
+    "VITE_API_URL": {
+      "description": "Mock API URL - used by Mock Service Worker",
+      "example": "http://localhost:3001"
+    }
   }
 }
