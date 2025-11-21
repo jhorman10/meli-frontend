@@ -1,28 +1,16 @@
-import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React from 'react';
 import { ProductList } from '@/presentation/components/ProductList/ProductList';
-import { useSearchProducts } from '@/application/hooks/useSearchProducts';
+import { useSearchResultsPage } from '@/application/hooks/useSearchResultsPage';
 
 export const SearchResultsPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('q') || '';
-  const { search, results, isLoading, error } = useSearchProducts();
-
-  useEffect(() => {
-    if (query) {
-      search(query);
-    }
-  }, [query, search]);
-
-  // Related searches - placeholder data for now
-  const relatedSearches = [
-    'phone 7',
-    'phone se',
-    'phone xr',
-    'apple',
-    'phone',
-    'phone xs max',
-  ];
+  const {
+    query,
+    results,
+    isLoading,
+    error,
+    relatedSearches,
+    handleRelatedSearch,
+  } = useSearchResultsPage();
 
   return (
     <div className="max-w-4xl mx-auto px-6 pb-8 animate-fade-in">
@@ -35,7 +23,7 @@ export const SearchResultsPage: React.FC = () => {
               <React.Fragment key={term}>
                 {index > 0 && <span className="text-gray-400">|</span>}
                 <button
-                  onClick={() => search(term)}
+                  onClick={() => handleRelatedSearch(term)}
                   className="text-blue-600 hover:text-blue-800 cursor-pointer transition-colors"
                 >
                   {term}

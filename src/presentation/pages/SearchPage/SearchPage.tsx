@@ -1,13 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSearchPage } from '@/application/hooks/useSearchPage';
 import { SearchBar } from '@/presentation/components/SearchBar/SearchBar';
 
 export const SearchPage: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleSearch = (query: string) => {
-    navigate(`/search?q=${query}`);
-  };
+  const { handleSearch } = useSearchPage();
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center animate-fade-in">

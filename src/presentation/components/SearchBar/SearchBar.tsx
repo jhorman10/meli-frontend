@@ -1,4 +1,5 @@
-import React, { useEffect, useState, type FormEvent } from 'react';
+import React from 'react';
+import { useSearchBar } from '@/application/hooks/useSearchBar';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -13,18 +14,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = 'Buscar productos...',
   initialValue = '',
 }) => {
-  const [query, setQuery] = useState(initialValue);
-
-  useEffect(() => {
-    setQuery(initialValue);
-  }, [initialValue]);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (query.trim().length >= 3) {
-      onSearch(query.trim());
-    }
-  };
+  const { query, setQuery, handleSubmit } = useSearchBar({
+    initialValue,
+    onSearch,
+  });
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto w-[95%] md:w-[70%]">
