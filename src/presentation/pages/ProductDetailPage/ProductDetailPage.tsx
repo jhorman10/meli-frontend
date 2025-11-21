@@ -3,6 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import { ProductAPI } from '@/infrastructure/api/ProductAPI';
 import type { ProductDetails } from '@/domain/entities/Product';
 import { ProductDetailSkeleton } from '@/presentation/components/ProductDetailSkeleton/ProductDetailSkeleton';
+import {
+  formatPrice,
+  calculateDiscount,
+  calculatePriceWithoutTax,
+} from '@/shared/utils';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,26 +40,6 @@ export const ProductDetailPage: React.FC = () => {
     fetchProduct();
   }, [id]);
 
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const calculateDiscount = (): number => {
-    if (!product?.originalPrice || !product?.price) return 0;
-    return Math.round(
-      ((product.originalPrice - product.price) / product.originalPrice) * 100
-    );
-  };
-
-  const calculatePriceWithoutTax = (price: number): number => {
-    // Estimating 21% VAT removal
-    return Math.round(price / 1.21);
-  };
-
   if (isLoading) return <ProductDetailSkeleton />;
 
   if (error) {
@@ -86,7 +71,9 @@ export const ProductDetailPage: React.FC = () => {
     );
   }
 
-  const discount = calculateDiscount();
+  const discount = product.originalPrice
+    ? calculateDiscount(product.originalPrice, product.price)
+    : 0;
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -181,7 +168,7 @@ export const ProductDetailPage: React.FC = () => {
           <div className="mb-6">
             <div className="flex items-baseline mb-1">
               <span className="text-3xl font-bold">
-                {formatPrice(product.price)}
+                {formatPrice(product.price, product.currency)}
               </span>
               {discount > 0 && (
                 <span className="ml-2 text-green-600 font-medium">
@@ -191,21 +178,24 @@ export const ProductDetailPage: React.FC = () => {
             </div>
             {product.originalPrice && (
               <div className="text-gray-500 line-through">
-                {formatPrice(product.originalPrice)}
+                {formatPrice(product.originalPrice, product.currency)}
               </div>
             )}
             {product.installments && (
               <div className="text-gray-600 mt-2">
                 Mismo precio en {product.installments.quantity} cuotas de{' '}
                 <span className="font-medium">
-                  {formatPrice(product.installments.amount)}
+                  {formatPrice(product.installments.amount, product.currency)}
                 </span>
               </div>
             )}
             <div className="text-gray-600 mt-1">
               Precio sin impuestos nacionales:{' '}
               <span className="font-medium">
-                {formatPrice(calculatePriceWithoutTax(product.price))}
+                {formatPrice(
+                  calculatePriceWithoutTax(product.price),
+                  product.currency
+                )}
               </span>
             </div>
           </div>
