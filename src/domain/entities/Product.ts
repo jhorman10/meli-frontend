@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   title: string;
   price: number;
+  originalPrice?: number;
   currency: string;
   condition: 'new' | 'used';
   thumbnail: string;
