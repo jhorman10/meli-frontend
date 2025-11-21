@@ -1,44 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ProductAPI } from '@/infrastructure/api/ProductAPI';
-import type { ProductDetails } from '@/domain/entities/Product';
+
 import { ProductDetailSkeleton } from '@/presentation/components/ProductDetailSkeleton/ProductDetailSkeleton';
 import {
   formatPrice,
   calculateDiscount,
   calculatePriceWithoutTax,
 } from '@/shared/utils';
+import { useProductDetailPage } from '@/application/hooks/useProductDetailPage';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<ProductDetails | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedImage, setSelectedImage] = useState<string>('');
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      if (!id) return;
-
-      try {
-        setIsLoading(true);
-        setError(null);
-        const productAPI = new ProductAPI();
-        const data = await productAPI.getById(id);
-        setProduct(data);
-        setSelectedImage(data.pictures[0]?.url || data.thumbnail);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : 'Error al cargar el producto'
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [id]);
+  const {
+    product,
+    isLoading,
+    error,
+    selectedImage,
+    setSelectedImage,
+    quantity,
+    setQuantity,
+  } = useProductDetailPage(id ?? '');
 
   if (isLoading) return <ProductDetailSkeleton />;
 
@@ -47,7 +28,7 @@ export const ProductDetailPage: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Error</h1>
-          <p className="text-gray-600 mb-4">{error}</p>
+          <p className="text-gray-600 mb-4">{error.message}</p>
           <Link to="/" className="text-blue-600 underline">
             Volver al inicio
           </Link>
@@ -154,7 +135,7 @@ export const ProductDetailPage: React.FC = () => {
                     }`}
                     viewBox="0 0 20 20"
                   >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
@@ -318,11 +299,11 @@ export const ProductDetailPage: React.FC = () => {
       </div>
 
       {/* Product Description */}
-      {product.description?.plain_text && (
+      {product.description?.plainText && (
         <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-xl font-bold mb-4">Descripción</h2>
           <p className="text-gray-700 mb-4 whitespace-pre-line">
-            {product.description.plain_text}
+            {product.description.plainText}
           </p>
           {product.attributes && product.attributes.length > 0 && (
             <div className="border-t border-gray-200 mt-4 pt-4">
@@ -331,7 +312,7 @@ export const ProductDetailPage: React.FC = () => {
                 {product.attributes.slice(0, 6).map((attr) => (
                   <li key={attr.id}>
                     <span className="font-medium">{attr.name}:</span>{' '}
-                    {attr.value_name}
+                    {attr.valueName}
                   </li>
                 ))}
               </ul>
