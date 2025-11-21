@@ -1,149 +1,128 @@
-# Deployment Guide - Vercel
+# Vercel Deployment Guide
 
-## Overview
+This guide explains how to deploy the Meli Frontend application to Vercel with Mock Service Worker (MSW) enabled.
 
-Este proyecto está configurado para ser desplegado en Vercel con soporte para Mock Service Worker (MSW) en producción.
+## Prerequisites
 
-## Configuración Previa
+- A Vercel account (free at https://vercel.com)
+- A GitHub repository with this project
+- Node.js 18+ and Yarn installed locally
 
-### Variables de Entorno en Vercel
+## Deployment Steps
 
-Accede a tu proyecto en Vercel y configura las siguientes variables de entorno:
+### 1. Connect Repository to Vercel
 
-#### Desarrollo (Preview)
-
-```
-VITE_ENABLE_MOCKS=true
-VITE_API_URL=http://localhost:3001
-```
-
-#### Producción (Si deseas usar API real)
-
-```
-VITE_ENABLE_MOCKS=false
-VITE_API_URL=https://api.mercadolibre.com
-```
-
-### Para mantener MSW en Vercel (recomendado para este proyecto)
-
-```
-VITE_ENABLE_MOCKS=true
-VITE_API_URL=http://localhost:3001
-```
-
-## Deploy Steps
-
-### 1. Conectar Repositorio
-
-1. Ir a [Vercel Dashboard](https://vercel.com/dashboard)
-2. Click en "Add New..." → "Project"
-3. Seleccionar tu repositorio de GitHub
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click "New Project"
+3. Select your GitHub repository containing this project
 4. Click "Import"
 
-### 2. Configurar Variables de Entorno
+### 2. Configure Project Settings
 
-1. En la pantalla de importación, click en "Environment Variables"
-2. Agregar las variables según tu ambiente:
-   - `VITE_ENABLE_MOCKS` = `true`
-   - `VITE_API_URL` = `http://localhost:3001`
+Vercel should auto-detect the following settings:
 
-### 3. Deploy
+- **Framework Preset**: Vite
+- **Build Command**: `yarn build`
+- **Output Directory**: `dist`
+- **Install Command**: `yarn install`
 
-Click en "Deploy" y esperar a que se complete.
+These are already configured in `vercel.json`.
 
-## Características de la Configuración
+### 3. Set Environment Variables
 
-### ✅ Archivos de Configuración
+In the Vercel Project Settings, add the following environment variables:
 
-- **vercel.json**: Configuración específica de Vercel
-  - Framework: Vite
-  - Build command optimizado
-  - Variables de entorno predefinidas
-  - Output directory: `dist`
-
-- **.vercelignore**: Archivos a ignorar durante el build
-  - Node modules optimizados
-  - Archivos innecesarios excluidos
-  - Reduce tamaño del build
-
-### ✅ MSW en Producción
-
-El proyecto detecta automáticamente cuándo activar MSW:
-
-```typescript
-const enableMocks =
-  import.meta.env.DEV || import.meta.env.VITE_ENABLE_MOCKS === 'true';
+```
+VITE_API_URL=http://localhost:3001
 ```
 
-Esto permite:
+This is the default Mock API URL used by MSW. The mock data will be served from the client-side without hitting any real backend.
 
-- MSW activo en desarrollo local
-- MSW activo en preview de Vercel
-- Posibilidad de desactivar para API real
+### 4. Deploy
 
-### ✅ Service Worker
+1. Click "Deploy"
+2. Wait for the deployment to complete
+3. Visit your deployed URL
 
-El archivo `public/mockServiceWorker.js` se incluye automáticamente en el build.
+## How Mock Service Worker Works on Vercel
 
-## Testing en Local
+MSW intercepts HTTP requests on the client-side and returns mock data. This means:
 
-### Simular Vercel Localmente
+- **No backend required**: The frontend works completely standalone
+- **Persistent mocking**: Mock data is always available
+- **Development mode**: The application runs in "development mode" even in production on Vercel
 
-```bash
-# Build del proyecto
-npm run build
+The configuration files handle this:
 
-# Preview del build
-npm run preview
-```
+- **src/main.tsx**: Initializes MSW before rendering the React app
+- **vercel.json**: Configures headers and rewrites for the service worker
+- **public/mockServiceWorker.js**: Service Worker file that intercepts requests
 
-Esto sirve para probar que todo funciona como en Vercel.
+## Environment Variables
 
-## Monitoreo
-
-### Logs en Vercel
-
-```bash
-# Ver logs en tiempo real
-vercel logs
-
-# Ver logs del proyecto
-vercel logs <proyecto-name>
-```
+| Variable       | Value                   | Description                     |
+| -------------- | ----------------------- | ------------------------------- |
+| `VITE_API_URL` | `http://localhost:3001` | Mock API endpoint (used by MSW) |
 
 ## Troubleshooting
 
-### MSW no funciona en Vercel
+### Service Worker not registering
 
-1. Verifica que `VITE_ENABLE_MOCKS=true` está configurada en Vercel
-2. Revisa los logs: `vercel logs`
-3. Asegúrate que `mockServiceWorker.js` está en `public/`
-4. Limpia cache y redeploya
+If you see errors about the service worker not registering:
 
-### Build falla
+1. Check that `public/mockServiceWorker.js` is present in the build
+2. Verify headers are being sent correctly in Vercel
+3. Check browser DevTools > Application > Service Workers
 
-1. Verifica que todas las variables de entorno están configuradas
-2. Revisa el build log en Vercel dashboard
-3. Intenta: `npm run build` localmente
+### MSW handlers not working
 
-### Performance
+If mock data is not being returned:
 
-El proyecto está optimizado para Vercel:
+1. Open browser DevTools > Network tab
+2. Check if requests are being intercepted (should show as `from service worker`)
+3. Check console for any errors
+4. Verify handlers are defined in `src/infrastructure/mocks/handlers.ts`
 
-- Build rápido con Vite
-- Sourcemaps desactivados en producción
-- Archivos innecesarios ignorados
+### Build failures
 
-## Integración Continua
+If the build fails:
 
-Cada push a `main` (o tu rama predefinida) dispara un deploy automático en Vercel.
+1. Clear cache: Delete `.next` or `dist` folder locally
+2. Try rebuilding: `yarn build`
+3. Check for TypeScript errors: `yarn tsc --noEmit`
 
-### Preview Deployments
+## Local Development
 
-Cada Pull Request genera una preview en: `https://<proyecto>-<hash>.vercel.app`
+To test the build locally before deploying:
 
-## Recursos
+```bash
+yarn build
+yarn preview
+```
 
-- [Vercel Docs](https://vercel.com/docs)
-- [Vite on Vercel](https://vercel.com/guides/nextjs-www-vercel-com)
-- [MSW Documentation](https://mswjs.io/)
+This runs a local preview server with the production build.
+
+## Production Monitoring
+
+Monitor your deployment:
+
+1. Visit Vercel Dashboard
+2. Select your project
+3. Check Deployments tab for status
+4. View logs in the "Runtime Logs" section
+
+## Redeployment
+
+To redeploy after pushing changes:
+
+1. Push to your main branch
+2. Vercel automatically detects changes
+3. Deployment starts automatically
+4. Check deployment status in Vercel Dashboard
+
+## Additional Resources
+
+- [Vercel Documentation](https://vercel.com/docs)
+- [Vite Deployment Guide](https://vitejs.dev/guide/static-deploy.html)
+- [Mock Service Worker Documentation](https://mswjs.io/)
+- [React Router Documentation](https://reactrouter.com/)

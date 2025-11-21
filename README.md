@@ -62,7 +62,27 @@ The project follows **Clean Architecture** principles to ensure scalability and 
 
 ### Mocking
 
-- **Mock Service Worker (MSW)**: Used to intercept API requests and return mock data. This allows the frontend to be developed and tested independently of a real backend.
+- **Mock Service Worker (MSW)**: Used to intercept API requests and return mock data. This allows the frontend to be developed and tested independently of a real backend. MSW works both in development and production (Vercel).
+
+## 📦 Deployment
+
+### Vercel
+
+This project is configured to deploy on Vercel with MSW fully functional. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed deployment instructions.
+
+Key features:
+
+- ✅ MSW works in production (no backend required)
+- ✅ Service Worker properly configured
+- ✅ Environment variables managed via Vercel dashboard
+- ✅ Automatic deployments on push
+
+Quick deployment:
+
+1. Push to GitHub
+2. Import repository in Vercel
+3. Add environment variable: `VITE_API_URL=http://localhost:3001`
+4. Deploy
 
 ## 📝 What I would do differently (with more time)
 
@@ -82,35 +102,4 @@ src/
 ├── presentation/      # Interface Adapters (UI)
 ├── main.tsx          # Entry point
 └── vite-env.d.ts     # Vite types
-```
-
-## 🚢 Deployment
-
-### Vercel
-
-This project is fully configured for deployment on Vercel with MSW (Mock Service Worker) support in production.
-
-#### Quick Deploy
-
-1. Push your code to GitHub
-2. Import project in [Vercel Dashboard](https://vercel.com/dashboard)
-3. Configure environment variables:
-   - `VITE_ENABLE_MOCKS=true`
-   - `VITE_API_URL=http://localhost:3001`
-4. Deploy!
-
-For detailed instructions, see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
-
-### Environment Variables
-
-| Variable            | Description        | Example                 |
-| ------------------- | ------------------ | ----------------------- |
-| `VITE_API_URL`      | API base URL       | `http://localhost:3001` |
-| `VITE_ENABLE_MOCKS` | Enable MSW mocking | `true` or `false`       |
-
-### Preview Production Build
-
-```bash
-npm run build
-npm run preview
 ```
