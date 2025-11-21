@@ -215,7 +215,7 @@ export const ProductDetailPage: React.FC = () => {
             <div className="border-t border-b border-gray-200 py-4 mb-6">
               <div className="flex items-start mb-3">
                 <svg
-                  className="w-5 h-5 text-green-600 mt-1 mr-2 flex-shrink-0"
+                  className="w-5 h-5 text-green-600 mt-1 mr-2 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -239,7 +239,7 @@ export const ProductDetailPage: React.FC = () => {
               </div>
               <div className="flex items-start">
                 <svg
-                  className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0"
+                  className="w-5 h-5 text-blue-600 mt-1 mr-2 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
