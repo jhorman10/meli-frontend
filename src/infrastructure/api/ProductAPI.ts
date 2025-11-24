@@ -13,7 +13,7 @@ import type {
 export class ProductAPI implements ProductRepository {
   private baseURL: string;
 
-  constructor(baseURL: string = import.meta.env.VITE_API_URL as string) {
+  constructor(baseURL: string) {
     this.baseURL = baseURL;
     console.debug('[ProductAPI] Initialized with baseURL:', this.baseURL);
   }
@@ -26,7 +26,7 @@ export class ProductAPI implements ProductRepository {
       url.searchParams.set('limit', params.limit.toString());
     }
 
-    if (params.offset) {
+    if (params.offset !== undefined) {
       url.searchParams.set('offset', params.offset.toString());
     }
 

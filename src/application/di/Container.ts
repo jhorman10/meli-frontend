@@ -30,7 +30,9 @@ export class Container {
    */
   getProductRepository(): ProductRepository {
     if (!this.productRepository) {
-      this.productRepository = new ProductAPI();
+      this.productRepository = new ProductAPI(
+        (import.meta.env.VITE_API_URL as string) || 'http://localhost:3001'
+      );
     }
     return this.productRepository;
   }
