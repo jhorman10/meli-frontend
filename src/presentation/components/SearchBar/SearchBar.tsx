@@ -21,23 +21,23 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   });
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto w-[95%] md:w-[70%]">
+    <form onSubmit={handleSubmit} className="w-full">
       <div className="relative">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full px-6 py-4 pr-16 text-lg border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
+          className="w-full p-4 pr-12 rounded-lg shadow-md border-none focus:ring-2 focus:ring-blue-500 outline-none text-gray-800"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading || query.trim().length < 3}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 text-gray-500 hover:text-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? (
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
           ) : (
             <svg
               className="w-6 h-6"

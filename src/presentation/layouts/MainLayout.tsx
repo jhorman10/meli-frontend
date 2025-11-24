@@ -14,28 +14,22 @@ export const MainLayout: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header con barra de búsqueda */}
-      <div className="bg-yellow-400 p-4 mb-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div className="p-4 mb-8" style={{ backgroundColor: '#FFE600' }}>
+        <div className="max-w-5xl mx-auto flex items-center gap-4">
+          {/* Logo */}
           <button
-            onClick={() => navigate(-1)}
-            className="shrink-0 inline-flex items-center text-gray-700 hover:text-gray-900 font-medium transition-colors p-2 hover:bg-yellow-300 rounded-lg"
-            title="Volver"
+            onClick={() => navigate('/')}
+            className="shrink-0 hover:opacity-80 transition-opacity"
+            title="Ir al inicio"
           >
-            <svg
-              className="w-6 h-6 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            <span className="hidden sm:inline">Volver</span>
+            <img
+              src="/logo.svg"
+              alt="Me-Li"
+              className="w-12 h-12 object-contain"
+            />
           </button>
+
+          {/* Search Bar */}
           <div className="flex-1">
             <SearchBar
               onSearch={handleSearch}
