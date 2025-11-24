@@ -19,7 +19,7 @@ export const MainLayout: React.FC = () => {
           {/* Logo */}
           <button
             onClick={() => navigate('/')}
-            className="shrink-0 hover:opacity-80 transition-opacity"
+            className="hidden md:block shrink-0 hover:opacity-80 transition-opacity"
             title="Ir al inicio"
           >
             <img
