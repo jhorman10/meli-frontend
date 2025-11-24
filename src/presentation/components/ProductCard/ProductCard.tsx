@@ -9,7 +9,10 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+    <div
+      className="bg-white rounded-lg shadow-sm border border-gray-200 p-5"
+      role="listitem"
+    >
       <div className="flex flex-col md:flex-row md:items-start gap-4">
         {/* Imagen del Producto */}
         <Link

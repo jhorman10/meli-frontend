@@ -21,7 +21,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   });
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full"
+      role="search"
+      aria-label="Buscar productos"
+    >
       <div className="relative">
         <input
           type="text"
@@ -30,11 +35,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           placeholder={placeholder}
           className="w-full px-4 py-3 pr-12 rounded-lg shadow-md border-none focus:ring-2 focus:ring-blue-500 outline-none text-gray-800"
           disabled={isLoading}
+          aria-label={placeholder}
         />
         <button
           type="submit"
           disabled={isLoading || query.trim().length < 3}
           className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          aria-label="Buscar"
           title="Buscar"
         >
           {isLoading ? (
