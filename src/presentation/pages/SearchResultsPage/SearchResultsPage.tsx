@@ -1,66 +1,67 @@
 import React from 'react';
-import { ProductList } from '@/presentation/components/ProductList/ProductList';
+import { useSearchParams } from 'react-router-dom';
+import { ProductCard } from '@/presentation/components/ProductCard/ProductCard';
+import { ProductCardSkeleton } from '@/presentation/components/ProductCardSkeleton/ProductCardSkeleton';
 import { useSearchResultsPage } from '@/application/hooks/useSearchResultsPage';
 import { UI_STRINGS } from '@/shared/constants';
+import { SEO } from '@/presentation/components/SEO/SEO';
 
 export const SearchResultsPage: React.FC = () => {
-  const {
-    query,
-    results,
-    isLoading,
-    error,
-    relatedSearches,
-    handleRelatedSearch,
-  } = useSearchResultsPage();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q') || '';
+  const { results, isLoading, error, handleRelatedSearch } =
+    useSearchResultsPage();
+
+  if (isLoading) {
+    return (
+      <div className="max-w-5xl mx-auto p-4">
+        {[...Array(4)].map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            {UI_STRINGS.SEARCH.ERROR_TITLE}
+          </h1>
+          <p className="text-gray-600">{error.message}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pb-8 animate-fade-in">
-      {/* Related Searches */}
-      {query && (
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-2">
-            <p> {UI_STRINGS.SEARCH.RELATED_SEARCHES}</p>
-            {relatedSearches.map((term, index) => (
-              <React.Fragment key={term}>
-                {index > 0 && <span className="text-gray-400">|</span>}
-                <button
-                  onClick={() => handleRelatedSearch(term)}
-                  className="text-blue-600 hover:text-blue-800 cursor-pointer transition-colors"
-                >
-                  {term}
-                </button>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="max-w-5xl mx-auto p-4">
+      <SEO
+        title={`${query} | Me-Li`}
+        description={`Envíos Gratis en el día. Compre ${query} en cuotas sin interés! Conozca nuestras increíbles ofertas y promociones en millones de productos.`}
+      />
+      {/* Related searches (mocked for now) */}
+      <div className="mb-4 flex gap-2 overflow-x-auto pb-2">
+        <span className="text-sm text-gray-500 whitespace-nowrap py-1">
+          {UI_STRINGS.SEARCH.RELATED_SEARCHES}
+        </span>
+        {['iPhone', 'Samsung', 'Motorola', 'Xiaomi'].map((term) => (
+          <button
+            key={term}
+            onClick={() => handleRelatedSearch(term)}
+            className="text-sm text-blue-600 hover:underline whitespace-nowrap py-1 px-2 bg-blue-50 rounded-full"
+          >
+            {term}
+          </button>
+        ))}
+      </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <div className="flex">
-            <svg
-              className="h-5 w-5 text-red-400 mt-0.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
-              />
-            </svg>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">
-                {UI_STRINGS.SEARCH.ERROR_TITLE}
-              </h3>
-              <p className="text-sm text-red-700">{error.message}</p>
-            </div>
-          </div>
-        </div>
-      )}
-      <ProductList products={results?.products || []} isLoading={isLoading} />
+      <div className="bg-white rounded-lg shadow-sm divide-y divide-gray-200">
+        {results?.products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

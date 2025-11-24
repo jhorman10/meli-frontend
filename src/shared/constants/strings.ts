@@ -1,6 +1,6 @@
 export const UI_STRINGS = {
   COMMON: {
-    MERCADO_LIBRE: 'Mercado Libre',
+    MERCADO_LIBRE: 'Me-Li',
     LOADING: 'Cargando...',
     ERROR: 'Error',
     BACK_TO_HOME: 'Volver al inicio',
@@ -8,7 +8,7 @@ export const UI_STRINGS = {
   },
   SEARCH: {
     PLACEHOLDER: 'Buscar productos, marcas y más...',
-    TITLE: 'Mercado Libre',
+    TITLE: 'Me-Li',
     SUBTITLE:
       'La comunidad de compra y venta online más grande de América Latina',
     RELATED_SEARCHES: 'Búsquedas relacionadas:',
