@@ -1,21 +1,45 @@
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { SearchPage } from '../pages/SearchPage/SearchPage';
-import { ProductDetailPage } from '../pages/ProductDetailPage/ProductDetailPage';
-import { SearchResultsPage } from '../pages/SearchResultsPage/SearchResultsPage';
 import { MainLayout } from '../layouts/MainLayout';
+
+// Lazy load pages
+const SearchPage = lazy(() =>
+  import('../pages/SearchPage/SearchPage').then((module) => ({
+    default: module.SearchPage,
+  }))
+);
+const SearchResultsPage = lazy(() =>
+  import('../pages/SearchResultsPage/SearchResultsPage').then((module) => ({
+    default: module.SearchResultsPage,
+  }))
+);
+const ProductDetailPage = lazy(() =>
+  import('../pages/ProductDetailPage/ProductDetailPage').then((module) => ({
+    default: module.ProductDetailPage,
+  }))
+);
+
+// Simple loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+);
 
 export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SearchPage />} />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
 
-        {/* Rutas con MainLayout (header con barra de búsqueda) */}
-        <Route element={<MainLayout />}>
-          <Route path="/search" element={<SearchResultsPage />} />
-          <Route path="/items/:id" element={<ProductDetailPage />} />
-        </Route>
-      </Routes>
+          {/* Rutas con MainLayout (header con barra de búsqueda) */}
+          <Route element={<MainLayout />}>
+            <Route path="/search" element={<SearchResultsPage />} />
+            <Route path="/items/:id" element={<ProductDetailPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
