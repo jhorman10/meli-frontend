@@ -57,7 +57,7 @@ export const SearchResultsPage: React.FC = () => {
         ))}
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm divide-y divide-gray-200">
+      <div className="flex flex-col gap-2">
         {results?.products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
