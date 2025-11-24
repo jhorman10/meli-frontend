@@ -4,8 +4,8 @@ import { ProductService } from '../services/ProductService';
 import { SearchService } from '../services/SearchService';
 
 /**
- * Dependency Injection Container
- * Singleton pattern to manage application dependencies
+ * Contenedor de Inyección de Dependencias
+ * Patrón Singleton para manejar dependencias de la aplicación
  */
 export class Container {
   private static instance: Container;
@@ -16,7 +16,7 @@ export class Container {
   private constructor() {}
 
   /**
-   * Get container singleton instance
+   * Obtener instancia singleton del contenedor
    */
   static getInstance(): Container {
     if (!Container.instance) {
@@ -26,7 +26,7 @@ export class Container {
   }
 
   /**
-   * Get ProductRepository instance
+   * Obtener instancia de ProductRepository
    */
   getProductRepository(): ProductRepository {
     if (!this.productRepository) {
@@ -36,7 +36,7 @@ export class Container {
   }
 
   /**
-   * Get ProductService instance
+   * Obtener instancia de ProductService
    */
   getProductService(): ProductService {
     if (!this.productService) {
@@ -46,7 +46,7 @@ export class Container {
   }
 
   /**
-   * Get SearchService instance
+   * Obtener instancia de SearchService
    */
   getSearchService(): SearchService {
     if (!this.searchService) {
@@ -56,7 +56,7 @@ export class Container {
   }
 
   /**
-   * Reset all instances (useful for testing)
+   * Reiniciar todas las instancias (útil para pruebas)
    */
   reset(): void {
     this.productRepository = null;
@@ -65,11 +65,11 @@ export class Container {
   }
 
   /**
-   * Set custom repository (useful for testing)
+   * Establecer repositorio personalizado (útil para pruebas)
    */
   setProductRepository(repository: ProductRepository): void {
     this.productRepository = repository;
-    // Reset dependent services
+    // Reiniciar servicios dependientes
     this.productService = null;
     this.searchService = null;
   }

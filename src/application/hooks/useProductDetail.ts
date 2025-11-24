@@ -9,9 +9,9 @@ interface UseProductDetailReturn {
 }
 
 /**
- * useProductDetail Hook
- * Fetches product details by ID using ProductService
- * Returns ProductDetailsDTO for presentation layer
+ * Hook useProductDetail
+ * Obtiene detalles del producto por ID usando ProductService
+ * Retorna ProductDetailsDTO para la capa de presentación
  */
 export const useProductDetail = (productId: string): UseProductDetailReturn => {
   const [product, setProduct] = useState<ProductDetailsDTO | null>(null);

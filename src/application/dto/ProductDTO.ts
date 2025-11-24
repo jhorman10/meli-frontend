@@ -1,6 +1,6 @@
 /**
- * Product Data Transfer Object
- * Used to transfer product data between application and presentation layers
+ * Objeto de Transferencia de Datos de Producto
+ * Usado para transferir datos de producto entre las capas de aplicación y presentación
  */
 export interface ProductDTO {
   id: string;
@@ -27,8 +27,8 @@ export interface ProductDTO {
 }
 
 /**
- * Product Details Data Transfer Object
- * Extended version with additional details for product detail page
+ * Objeto de Transferencia de Datos de Detalles del Producto
+ * Versión extendida con detalles adicionales para la página de detalle del producto
  */
 export interface ProductDetailsDTO extends ProductDTO {
   availableQuantity: number;

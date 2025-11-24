@@ -2,19 +2,19 @@ import type { ProductRepository } from '@/domain/repositories/ProductRepository'
 import type { ProductDetails } from '@/domain/entities/Product';
 
 /**
- * GetProductById Use Case
- * Retrieves detailed product information by ID
+ * Caso de Uso GetProductById
+ * Recupera información detallada del producto por ID
  */
 export class GetProductById {
   constructor(private productRepository: ProductRepository) {}
 
   async execute(id: string): Promise<ProductDetails> {
-    // Validate ID
+    // Validar ID
     if (!id || !id.trim()) {
       throw new Error('El ID del producto es requerido');
     }
 
-    // Get product details
+    // Obtener detalles del producto
     const product = await this.productRepository.getById(id);
 
     if (!product) {

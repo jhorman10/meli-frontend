@@ -69,11 +69,11 @@ export const ProductDetailPage: React.FC = () => {
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* ================= LEFT COLUMN - Product Images ================= */}
+        {/* ================= COLUMNA IZQUIERDA - Imágenes del Producto ================= */}
         <div className="md:w-1/2">
           <div className="bg-white p-4">
             <div className="flex flex-col md:flex-row gap-4">
-              {/* Thumbnails */}
+              {/* Miniaturas */}
               <div className="flex md:flex-col gap-2 order-2 md:order-1">
                 {product.pictures.slice(0, 4).map((picture) => (
                   <button
@@ -94,7 +94,7 @@ export const ProductDetailPage: React.FC = () => {
                 ))}
               </div>
 
-              {/* Main Image */}
+              {/* Imagen Principal */}
               <div className="w-full md:w-auto flex-1 order-1 md:order-2">
                 <div className="bg-gray-100 h-80 rounded-lg flex items-center justify-center p-4">
                   <img
@@ -108,9 +108,9 @@ export const ProductDetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* ================= RIGHT COLUMN - Product Info ================= */}
+        {/* ================= COLUMNA DERECHA - Información del Producto ================= */}
         <div className="md:w-1/2 rounded-lg shadow-sm m-4 p-4 text-left">
-          {/* Product Status */}
+          {/* Estado del Producto */}
           <div className="mb-4">
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
               {product.condition === 'new'
@@ -124,10 +124,10 @@ export const ProductDetailPage: React.FC = () => {
             )}
           </div>
 
-          {/* Product Title */}
+          {/* Título del Producto */}
           <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
 
-          {/* Rating */}
+          {/* Calificación */}
           {product.rating && (
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400">
@@ -151,7 +151,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           )}
 
-          {/* Pricing */}
+          {/* Precios */}
           <div className="mb-6">
             <div className="flex items-baseline mb-1">
               <span className="text-3xl font-bold">
@@ -189,7 +189,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Payment Methods */}
+          {/* Métodos de Pago */}
           <div className="mb-6">
             <button
               type="button"
@@ -199,7 +199,7 @@ export const ProductDetailPage: React.FC = () => {
             </button>
           </div>
 
-          {/* Shipping */}
+          {/* Envío */}
           {product.freeShipping && (
             <div className="border-t border-b border-gray-200 py-4 mb-6">
               <div className="flex items-start mb-3">
@@ -263,7 +263,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           )}
 
-          {/* Stock */}
+          {/* Inventario */}
           <div className="mb-6">
             <p className="font-medium mb-2">
               {UI_STRINGS.PRODUCT_DETAIL.STOCK.AVAILABLE}
@@ -296,7 +296,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Botones de Acción */}
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               type="button"
@@ -314,7 +314,7 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Product Description */}
+      {/* Descripción del Producto */}
       {product.description?.plainText && (
         <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-xl font-bold mb-4">

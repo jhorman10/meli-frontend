@@ -3,19 +3,19 @@ import type { ProductService } from '../services/ProductService';
 import type { SearchService } from '../services/SearchService';
 
 /**
- * Service Providers
- * Convenient factory functions to get service instances
+ * Proveedores de Servicios
+ * Funciones de fábrica convenientes para obtener instancias de servicios
  */
 
 /**
- * Get ProductService instance
+ * Obtener instancia de ProductService
  */
 export const getProductService = (): ProductService => {
   return Container.getInstance().getProductService();
 };
 
 /**
- * Get SearchService instance
+ * Obtener instancia de SearchService
  */
 export const getSearchService = (): SearchService => {
   return Container.getInstance().getSearchService();

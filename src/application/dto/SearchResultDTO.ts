@@ -1,8 +1,8 @@
 import type { ProductDTO } from './ProductDTO';
 
 /**
- * Search Result Data Transfer Object
- * Contains search results with metadata and pagination info
+ * Objeto de Transferencia de Datos de Resultados de Búsqueda
+ * Contiene resultados de búsqueda con metadatos e información de paginación
  */
 export interface SearchResultDTO {
   products: ProductDTO[];
@@ -20,8 +20,8 @@ export interface SearchResultDTO {
 }
 
 /**
- * Search Params DTO
- * Parameters for search operations
+ * DTO de Parámetros de Búsqueda
+ * Parámetros para operaciones de búsqueda
  */
 export interface SearchParamsDTO {
   query: string;

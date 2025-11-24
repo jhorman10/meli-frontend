@@ -4,14 +4,14 @@ import type { ProductDetailsDTO } from '@/application/dto/ProductDTO';
 import { ERROR_MESSAGES } from '@/shared/constants';
 
 /**
- * Custom hook that encapsulates all product‑detail page logic:
- *   • Fetches product data via ProductService
- *   • Manages loading / error state
- *   • Handles selected image for the gallery
- *   • Manages quantity selection
+ * Hook personalizado que encapsula toda la lógica de la página de detalle del producto:
+ *   • Obtiene datos del producto vía ProductService
+ *   • Maneja el estado de carga / error
+ *   • Maneja la imagen seleccionada para la galería
+ *   • Maneja la selección de cantidad
  *
- * The component can stay purely presentational and simply render the values
- * returned by this hook.
+ * El componente puede permanecer puramente presentacional y simplemente renderizar los valores
+ * retornados por este hook.
  */
 export const useProductDetailPage = (productId: string) => {
   const [product, setProduct] = useState<ProductDetailsDTO | null>(null);

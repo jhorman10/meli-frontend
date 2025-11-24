@@ -11,7 +11,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
       <div className="flex flex-col md:flex-row md:items-start gap-4">
-        {/* Product Image */}
+        {/* Imagen del Producto */}
         <Link
           to={`/items/${product.id}`}
           className="shrink-0 w-32 h-32 bg-gray-50 rounded-lg overflow-hidden"
@@ -23,9 +23,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
         </Link>
 
-        {/* Product Information */}
+        {/* Información del Producto */}
         <div className="flex-1 min-w-0">
-          {/* Brand Badge */}
+          {/* Insignia de Marca */}
           {product.title.toLowerCase().includes('apple') && (
             <div className="mb-2">
               <span className="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">
@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           )}
 
-          {/* Title */}
+          {/* Título */}
           <Link
             to={`/items/${product.id}`}
             className="text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 mb-2"
@@ -42,7 +42,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product.title}
           </Link>
 
-          {/* Price Section */}
+          {/* Sección de Precio */}
           <div className="flex items-center gap-2 mb-2">
             <p className="text-xl font-bold text-gray-900">
               {product.formattedPrice}
@@ -59,7 +59,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
           </div>
 
-          {/* Rating */}
+          {/* Calificación */}
           {product.rating && (
             <div className="flex items-center gap-1 mb-2">
               <div className="flex">
@@ -84,7 +84,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           )}
 
-          {/* Installments */}
+          {/* Cuotas */}
           {product.installments && (
             <p className="text-sm text-gray-700 mb-1">
               {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
@@ -94,7 +94,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </p>
           )}
 
-          {/* Shipping */}
+          {/* Envío */}
           {product.freeShipping && (
             <div className="flex items-center gap-1 text-sm text-green-600">
               <svg

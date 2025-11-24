@@ -8,8 +8,8 @@ import type { SearchResultDTO, SearchParamsDTO } from '../dto/SearchResultDTO';
 
 /**
  * SearchService
- * Application service for search-related operations
- * Orchestrates search use cases and handles DTO mapping
+ * Servicio de aplicación para operaciones de búsqueda
+ * Orquesta casos de uso de búsqueda y maneja el mapeo de DTOs
  */
 export class SearchService {
   private searchProductsUseCase: SearchProducts;
@@ -19,23 +19,23 @@ export class SearchService {
   }
 
   /**
-   * Search products
-   * Returns SearchResultDTO for presentation layer
+   * Buscar productos
+   * Retorna SearchResultDTO para la capa de presentación
    */
   async searchProducts(params: SearchParamsDTO): Promise<SearchResultDTO> {
     try {
-      // Convert DTO params to domain params
+      // Convertir parámetros DTO a parámetros de dominio
       const domainParams: SearchParams =
         SearchResultMapper.toDomainParams(params);
 
-      // Execute use case
+      // Ejecutar caso de uso
       const searchResult =
         await this.searchProductsUseCase.execute(domainParams);
 
-      // Map to DTO
+      // Mapear a DTO
       return SearchResultMapper.toDTO(searchResult, domainParams);
     } catch (error) {
-      // Transform domain errors to application-level errors
+      // Transformar errores de dominio a errores de nivel de aplicación
       if (error instanceof Error) {
         throw new Error(`Error en la búsqueda: ${error.message}`);
       }
@@ -44,8 +44,8 @@ export class SearchService {
   }
 
   /**
-   * Quick search with just a query string
-   * Convenience method for simple searches
+   * Búsqueda rápida solo con una cadena de consulta
+   * Método de conveniencia para búsquedas simples
    */
   async quickSearch(
     query: string,

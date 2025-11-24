@@ -13,7 +13,7 @@ export const useSearchResultsPage = () => {
     }
   }, [query, search]);
 
-  // Related searches - placeholder data for now
+  // Búsquedas relacionadas - datos de marcador de posición por ahora
   const relatedSearches = [
     'phone 7',
     'phone se',

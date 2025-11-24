@@ -1,10 +1,10 @@
 import { DEFAULT_TAX_RATE } from '../constants/currency';
 
 /**
- * Calculate the discount percentage between original and current price
- * @param originalPrice - The original price before discount
- * @param currentPrice - The current discounted price
- * @returns Discount percentage as an integer (0-100)
+ * Calcula el porcentaje de descuento entre el precio original y el actual
+ * @param originalPrice - El precio original antes del descuento
+ * @param currentPrice - El precio actual con descuento
+ * @returns Porcentaje de descuento como un entero (0-100)
  */
 export const calculateDiscount = (
   originalPrice: number,
@@ -15,10 +15,10 @@ export const calculateDiscount = (
 };
 
 /**
- * Calculate price without tax
- * @param price - The price including tax
- * @param taxRate - Optional tax rate (defaults to DEFAULT_TAX_RATE)
- * @returns Price without tax
+ * Calcula el precio sin impuestos
+ * @param price - El precio incluyendo impuestos
+ * @param taxRate - Tasa de impuestos opcional (por defecto DEFAULT_TAX_RATE)
+ * @returns Precio sin impuestos
  */
 export const calculatePriceWithoutTax = (
   price: number,

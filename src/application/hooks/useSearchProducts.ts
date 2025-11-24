@@ -10,9 +10,9 @@ interface UseSearchProductsReturn {
 }
 
 /**
- * useSearchProducts Hook
- * Provides search functionality using SearchService
- * Now uses DTOs instead of domain entities
+ * Hook useSearchProducts
+ * Provee funcionalidad de búsqueda usando SearchService
+ * Ahora usa DTOs en lugar de entidades de dominio
  */
 export const useSearchProducts = (): UseSearchProductsReturn => {
   const [results, setResults] = useState<SearchResultDTO | null>(null);

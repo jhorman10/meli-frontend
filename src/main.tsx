@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-// Initialize MSW for development and production (Vercel)
+// Inicializar MSW para desarrollo y producción (Vercel)
 async function initializeApp() {
-  // Only start MSW if not in production or if explicitly enabled
+  // Solo iniciar MSW si no está en producción o si está explícitamente habilitado
   const enableMocks =
     import.meta.env.DEV ||
     import.meta.env.VITE_ENABLE_MOCKS === 'true' ||
@@ -22,11 +22,11 @@ async function initializeApp() {
       });
     } catch (error) {
       console.error('MSW failed to start:', error);
-      // Continue app initialization even if MSW fails
+      // Continuar inicialización de la app incluso si MSW falla
     }
   }
 
-  // Render the app after MSW is ready
+  // Renderizar la app después de que MSW esté listo
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <App />
@@ -34,5 +34,5 @@ async function initializeApp() {
   );
 }
 
-// Start the app
+// Iniciar la app
 initializeApp();

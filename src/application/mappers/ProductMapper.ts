@@ -4,11 +4,11 @@ import { formatPrice, calculateDiscount } from '@/shared/utils';
 
 /**
  * ProductMapper
- * Maps between domain entities and DTOs
+ * Mapea entre entidades de dominio y DTOs
  */
 export class ProductMapper {
   /**
-   * Convert domain Product to ProductDTO
+   * Convertir Product de dominio a ProductDTO
    */
   static toDTO(product: Product): ProductDTO {
     const discountPercentage = product.originalPrice
@@ -50,7 +50,7 @@ export class ProductMapper {
   }
 
   /**
-   * Convert ProductDetails to ProductDetailsDTO
+   * Convertir ProductDetails a ProductDetailsDTO
    */
   static toDetailsDTO(product: ProductDetails): ProductDetailsDTO {
     const baseDTO = this.toDTO(product);
@@ -79,15 +79,15 @@ export class ProductMapper {
   }
 
   /**
-   * Convert array of Products to array of ProductDTOs
+   * Convertir array de Products a array de ProductDTOs
    */
   static toDTOList(products: Product[]): ProductDTO[] {
     return products.map((product) => this.toDTO(product));
   }
 
   /**
-   * Convert ProductDTO back to domain Product
-   * (Used when sending data back to domain layer)
+   * Convertir ProductDTO de vuelta a Product de dominio
+   * (Usado cuando se envían datos de vuelta a la capa de dominio)
    */
   static toDomain(dto: ProductDTO): Product {
     return {

@@ -7,11 +7,11 @@ import { ProductMapper } from './ProductMapper';
 
 /**
  * SearchResultMapper
- * Maps between search domain objects and DTOs
+ * Mapea entre objetos de dominio de búsqueda y DTOs
  */
 export class SearchResultMapper {
   /**
-   * Convert domain SearchResult to SearchResultDTO
+   * Convertir SearchResult de dominio a SearchResultDTO
    */
   static toDTO(
     searchResult: SearchResult,
@@ -36,7 +36,7 @@ export class SearchResultMapper {
   }
 
   /**
-   * Convert SearchParamsDTO to domain SearchParams
+   * Convertir SearchParamsDTO a SearchParams de dominio
    */
   static toDomainParams(dto: SearchParamsDTO): SearchParams {
     return {

@@ -6,8 +6,8 @@ import { ERROR_MESSAGES } from '@/shared/constants';
 
 /**
  * ProductService
- * Application service for product-related operations
- * Orchestrates use cases and handles DTO mapping
+ * Servicio de aplicación para operaciones relacionadas con productos
+ * Orquesta casos de uso y maneja el mapeo de DTOs
  */
 export class ProductService {
   private getProductByIdUseCase: GetProductById;
@@ -17,15 +17,15 @@ export class ProductService {
   }
 
   /**
-   * Get product details by ID
-   * Returns ProductDetailsDTO for presentation layer
+   * Obtener detalles del producto por ID
+   * Retorna ProductDetailsDTO para la capa de presentación
    */
   async getProductById(id: string): Promise<ProductDetailsDTO> {
     try {
       const product = await this.getProductByIdUseCase.execute(id);
       return ProductMapper.toDetailsDTO(product);
     } catch (error) {
-      // Transform domain errors to application-level errors
+      // Transformar errores de dominio a errores de nivel de aplicación
       if (error instanceof Error) {
         throw new Error(
           `${ERROR_MESSAGES.PRODUCT.FETCH_ERROR}: ${error.message}`
