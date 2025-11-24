@@ -1,5 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
+// Usar variable de entorno para la base URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 const products = [
   {
     id: 'MLA123456789',
@@ -34,7 +37,7 @@ const products = [
 ];
 
 export const handlers = [
-  http.get('http://localhost:3001/items', ({ request }) => {
+  http.get(`${API_BASE_URL}/items`, ({ request }) => {
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get('q') || '';
     const query = searchQuery.toLowerCase();
@@ -58,7 +61,7 @@ export const handlers = [
     });
   }),
 
-  http.get('http://localhost:3001/items/:id', ({ params }) => {
+  http.get(`${API_BASE_URL}/items/:id`, ({ params }) => {
     return HttpResponse.json({
       id: params.id as string,
       title: 'Apple iPhone 16 Pro (256gb) - Nuevo - Liberado - Caja Sellada',

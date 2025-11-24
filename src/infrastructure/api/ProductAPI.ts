@@ -13,10 +13,7 @@ import type {
 export class ProductAPI implements ProductRepository {
   private baseURL: string;
 
-  constructor(
-    baseURL: string = (import.meta.env.VITE_API_URL as string) ||
-      'http://localhost:3001'
-  ) {
+  constructor(baseURL: string = import.meta.env.VITE_API_URL as string) {
     this.baseURL = baseURL;
     console.debug('[ProductAPI] Initialized with baseURL:', this.baseURL);
   }
