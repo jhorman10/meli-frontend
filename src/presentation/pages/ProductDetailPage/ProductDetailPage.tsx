@@ -2,13 +2,19 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import { ProductDetailSkeleton } from '@/presentation/components/ProductDetailSkeleton/ProductDetailSkeleton';
-import {
-  formatPrice,
-  calculateDiscount,
-  calculatePriceWithoutTax,
-} from '@/shared/utils';
 import { useProductDetailPage } from '@/application/hooks/useProductDetailPage';
 import { UI_STRINGS } from '@/shared/constants';
+import {
+  ProductBreadcrumb,
+  ProductGallery,
+  ProductHeader,
+  ProductPrice,
+  ProductPaymentMethods,
+  ProductShipping,
+  ProductStock,
+  ProductActions,
+  ProductDescription,
+} from './components';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -55,291 +61,59 @@ export const ProductDetailPage: React.FC = () => {
     );
   }
 
-  const discount = product.originalPrice
-    ? calculateDiscount(product.originalPrice, product.price)
-    : 0;
-
   return (
     <div className="max-w-6xl mx-auto p-4">
-      {/* Breadcrumb */}
-      <div className="text-sm text-gray-500 mb-4">
-        <span>{UI_STRINGS.PRODUCT_DETAIL.BREADCRUMB.HOME}</span> &gt;{' '}
-        <span>{UI_STRINGS.PRODUCT_DETAIL.BREADCRUMB.PRODUCTS}</span> &gt;{' '}
-        <span>{product.title.split(' ')[0]}</span>
-      </div>
+      <ProductBreadcrumb title={product.title} />
 
       <div className="flex flex-col md:flex-row gap-8">
         {/* ================= COLUMNA IZQUIERDA - Imágenes del Producto ================= */}
         <div className="md:w-1/2">
-          <div className="bg-white p-4">
-            <div className="flex flex-col md:flex-row gap-4">
-              {/* Miniaturas */}
-              <div className="flex md:flex-col gap-2 order-2 md:order-1">
-                {product.pictures.slice(0, 4).map((picture) => (
-                  <button
-                    key={picture.id}
-                    onClick={() => setSelectedImage(picture.url)}
-                    className={`w-16 h-16 rounded-md overflow-hidden border-2 transition-all ${
-                      selectedImage === picture.url
-                        ? 'border-blue-500'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <img
-                      src={picture.url}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-
-              {/* Imagen Principal */}
-              <div className="w-full md:w-auto flex-1 order-1 md:order-2">
-                <div className="bg-gray-100 h-80 rounded-lg flex items-center justify-center p-4">
-                  <img
-                    src={selectedImage || product.thumbnail}
-                    alt={product.title}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProductGallery
+            pictures={product.pictures}
+            thumbnail={product.thumbnail}
+            title={product.title}
+            selectedImage={selectedImage}
+            onImageSelect={setSelectedImage}
+          />
         </div>
 
         {/* ================= COLUMNA DERECHA - Información del Producto ================= */}
         <div className="md:w-1/2 rounded-lg shadow-sm m-4 p-4 text-left">
-          {/* Estado del Producto */}
-          <div className="mb-4">
-            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              {product.condition === 'new'
-                ? UI_STRINGS.PRODUCT_DETAIL.STATUS.NEW
-                : UI_STRINGS.PRODUCT_DETAIL.STATUS.USED}
-            </span>
-            {product.soldQuantity > 0 && (
-              <span className="text-gray-600 text-sm ml-2">
-                {product.soldQuantity} {UI_STRINGS.PRODUCT_DETAIL.STATUS.SOLD}
-              </span>
-            )}
-          </div>
+          <ProductHeader
+            condition={product.condition}
+            soldQuantity={product.soldQuantity}
+            title={product.title}
+            rating={product.rating}
+          />
 
-          {/* Título del Producto */}
-          <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
+          <ProductPrice
+            price={product.price}
+            originalPrice={product.originalPrice}
+            currency={product.currency}
+            installments={product.installments}
+          />
 
-          {/* Calificación */}
-          {product.rating && (
-            <div className="flex items-center mb-4">
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className={`w-5 h-5 ${
-                      i < Math.floor(product.rating!.average)
-                        ? 'fill-current'
-                        : 'fill-gray-300'
-                    }`}
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="ml-2 text-sm text-gray-600">
-                {product.rating.average.toFixed(1)} ({product.rating.total})
-              </span>
-            </div>
-          )}
+          <ProductPaymentMethods />
 
-          {/* Precios */}
-          <div className="mb-6">
-            <div className="flex items-baseline mb-1">
-              <span className="text-3xl font-bold">
-                {formatPrice(product.price, product.currency)}
-              </span>
-              {discount > 0 && (
-                <span className="ml-2 text-green-600 font-medium">
-                  {discount}% {UI_STRINGS.COMMON.OFF}
-                </span>
-              )}
-            </div>
-            {product.originalPrice && (
-              <div className="text-gray-500 line-through">
-                {formatPrice(product.originalPrice, product.currency)}
-              </div>
-            )}
-            {product.installments && (
-              <div className="text-gray-600 mt-2">
-                {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
-                {product.installments.quantity}{' '}
-                {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
-                <span className="font-medium">
-                  {formatPrice(product.installments.amount, product.currency)}
-                </span>
-              </div>
-            )}
-            <div className="text-gray-600 mt-1">
-              {UI_STRINGS.PRODUCT_DETAIL.PRICING.PRICE_WITHOUT_TAX}{' '}
-              <span className="font-medium">
-                {formatPrice(
-                  calculatePriceWithoutTax(product.price),
-                  product.currency
-                )}
-              </span>
-            </div>
-          </div>
+          <ProductShipping freeShipping={product.freeShipping} />
 
-          {/* Métodos de Pago */}
-          <div className="mb-6">
-            <button
-              type="button"
-              className="text-blue-600 hover:underline text-sm font-medium"
-            >
-              {UI_STRINGS.PRODUCT_DETAIL.PAYMENT_METHODS.VIEW}
-            </button>
-          </div>
+          <ProductStock
+            availableQuantity={product.availableQuantity}
+            quantity={quantity}
+            onQuantityChange={setQuantity}
+          />
 
-          {/* Envío */}
-          {product.freeShipping && (
-            <div className="border-t border-b border-gray-200 py-4 mb-6">
-              <div className="flex items-start mb-3">
-                <svg
-                  className="w-5 h-5 text-green-600 mt-1 mr-2 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <div>
-                  <h3 className="font-medium">
-                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.FREE_TODAY}
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.ONLY_IN_CABA}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.BUY_WITHIN}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <svg
-                  className="w-5 h-5 text-blue-600 mt-1 mr-2 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <div>
-                  <h3 className="font-medium">
-                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.FREE_PICKUP}
-                  </h3>
-                  <button
-                    type="button"
-                    className="text-blue-600 hover:underline text-sm font-medium mt-1"
-                  >
-                    {UI_STRINGS.PRODUCT_DETAIL.SHIPPING.VIEW_MAP}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Inventario */}
-          <div className="mb-6">
-            <p className="font-medium mb-2">
-              {UI_STRINGS.PRODUCT_DETAIL.STOCK.AVAILABLE}
-            </p>
-            <div className="flex items-center gap-2 flex-wrap">
-              <label htmlFor="quantity" className="text-gray-600">
-                {UI_STRINGS.PRODUCT_DETAIL.STOCK.QUANTITY}
-              </label>
-              <select
-                id="quantity"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5"
-              >
-                {[...Array(Math.min(product.availableQuantity, 10))].map(
-                  (_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                      {i + 1}{' '}
-                      {i === 0
-                        ? UI_STRINGS.PRODUCT_DETAIL.STOCK.UNIT
-                        : UI_STRINGS.PRODUCT_DETAIL.STOCK.UNITS}
-                    </option>
-                  )
-                )}
-              </select>
-              <span className="text-gray-600">
-                ({product.availableQuantity}{' '}
-                {UI_STRINGS.PRODUCT_DETAIL.STOCK.AVAILABLE_COUNT})
-              </span>
-            </div>
-          </div>
-
-          {/* Botones de Acción */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              type="button"
-              className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-            >
-              {UI_STRINGS.PRODUCT_DETAIL.ACTIONS.BUY_NOW}
-            </button>
-            <button
-              type="button"
-              className="px-6 py-3 bg-blue-100 text-blue-600 font-medium rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-            >
-              {UI_STRINGS.PRODUCT_DETAIL.ACTIONS.ADD_TO_CART}
-            </button>
-          </div>
+          <ProductActions
+            onBuyNow={() => console.log('Buy now clicked')}
+            onAddToCart={() => console.log('Add to cart clicked')}
+          />
         </div>
       </div>
 
-      {/* Descripción del Producto */}
-      {product.description?.plainText && (
-        <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl font-bold mb-4">
-            {UI_STRINGS.PRODUCT_DETAIL.DESCRIPTION.TITLE}
-          </h2>
-          <p className="text-gray-700 mb-4 whitespace-pre-line">
-            {product.description.plainText}
-          </p>
-          {product.attributes && product.attributes.length > 0 && (
-            <div className="border-t border-gray-200 mt-4 pt-4">
-              <h3 className="font-medium mb-2">
-                {UI_STRINGS.PRODUCT_DETAIL.DESCRIPTION.FEATURES}
-              </h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-1">
-                {product.attributes.slice(0, 6).map((attr) => (
-                  <li key={attr.id}>
-                    <span className="font-medium">{attr.name}:</span>{' '}
-                    {attr.valueName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
+      <ProductDescription
+        description={product.description}
+        attributes={product.attributes}
+      />
     </div>
   );
 };
