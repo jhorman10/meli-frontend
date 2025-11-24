@@ -19,7 +19,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain mix-blend-multiply"
+            loading="lazy"
           />
         </Link>
 

@@ -34,6 +34,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
                 src={picture.url}
                 alt=""
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </button>
           ))}
