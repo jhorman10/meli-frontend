@@ -41,7 +41,7 @@ export const SearchResultsPage: React.FC = () => {
         title={`${query} | Me-Li`}
         description={`Envíos Gratis en el día. Compre ${query} en cuotas sin interés! Conozca nuestras increíbles ofertas y promociones en millones de productos.`}
       />
-      {/* Related searches (mocked for now) */}
+      {/* Búsquedas relacionadas (simuladas por ahora) */}
       <div className="mb-4 flex gap-2 overflow-x-auto pb-2">
         <span className="text-sm text-gray-500 whitespace-nowrap py-1">
           {UI_STRINGS.SEARCH.RELATED_SEARCHES}

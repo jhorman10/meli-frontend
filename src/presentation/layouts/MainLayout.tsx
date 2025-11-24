@@ -29,7 +29,7 @@ export const MainLayout: React.FC = () => {
             />
           </button>
 
-          {/* Search Bar */}
+          {/* Barra de búsqueda */}
           <div className="flex-1">
             <SearchBar
               onSearch={handleSearch}

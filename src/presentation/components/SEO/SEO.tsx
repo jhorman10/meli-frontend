@@ -16,22 +16,22 @@ export const SEO: React.FC<SEOProps> = ({
 }) => {
   return (
     <Helmet>
-      {/* Standard metadata tags */}
+      {/* Etiquetas de metadatos estándar */}
       <title>{title}</title>
       <meta name="description" content={description} />
 
-      {/* Facebook tags */}
+      {/* Etiquetas de Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {/* End Facebook tags */}
+      {/* Fin etiquetas de Facebook */}
 
-      {/* Twitter tags */}
+      {/* Etiquetas de Twitter */}
       <meta name="twitter:creator" content={name} />
       <meta name="twitter:card" content={type} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {/* End Twitter tags */}
+      {/* Fin etiquetas de Twitter */}
     </Helmet>
   );
 };

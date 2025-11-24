@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 
-// Lazy load pages
+// Carga diferida de páginas
 const SearchPage = lazy(() =>
   import('../pages/SearchPage/SearchPage').then((module) => ({
     default: module.SearchPage,
@@ -19,7 +19,7 @@ const ProductDetailPage = lazy(() =>
   }))
 );
 
-// Simple loading component
+// Componente de carga simple
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-100">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
