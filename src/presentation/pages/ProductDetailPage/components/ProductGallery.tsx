@@ -4,8 +4,8 @@ interface ProductGalleryProps {
   pictures: { id: string; url: string }[];
   thumbnail: string;
   title: string;
-  selectedImage: string;
-  onImageSelect: (url: string) => void;
+  selectedImage: { id?: string; url: string } | null;
+  onImageSelect: (image: { id?: string; url: string }) => void;
 }
 
 export const ProductGallery = React.memo<ProductGalleryProps>(
@@ -24,9 +24,11 @@ export const ProductGallery = React.memo<ProductGalleryProps>(
             {displayPictures.map((picture) => (
               <button
                 key={picture.id}
-                onClick={() => onImageSelect(picture.url)}
+                onClick={() =>
+                  onImageSelect({ id: picture.id, url: picture.url })
+                }
                 className={`w-16 h-16 rounded-md overflow-hidden border-2 transition-all ${
-                  selectedImage === picture.url
+                  selectedImage?.id === picture.id
                     ? 'border-blue-500'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
@@ -45,7 +47,7 @@ export const ProductGallery = React.memo<ProductGalleryProps>(
           <div className="w-full md:w-auto flex-1 order-1 md:order-2">
             <div className="bg-gray-100 h-80 rounded-lg flex items-center justify-center p-4">
               <img
-                src={selectedImage || thumbnail}
+                src={selectedImage?.url || thumbnail}
                 alt={title}
                 className="max-h-full max-w-full object-contain"
               />

@@ -17,7 +17,10 @@ export const useProductDetailPage = (productId: string) => {
   const [product, setProduct] = useState<ProductDetailsDTO | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [selectedImage, setSelectedImage] = useState<string>('');
+  const [selectedImage, setSelectedImage] = useState<{
+    id?: string;
+    url: string;
+  } | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   const productService = getProductService();
@@ -34,7 +37,11 @@ export const useProductDetailPage = (productId: string) => {
       try {
         const details = await productService.getProductById(productId);
         setProduct(details);
-        setSelectedImage(details.pictures[0]?.url || details.thumbnail);
+        // Initialize with first picture or thumbnail
+        const initialImage = details.pictures[0]
+          ? { id: details.pictures[0].id, url: details.pictures[0].url }
+          : { id: 'thumbnail', url: details.thumbnail };
+        setSelectedImage(initialImage);
       } catch (err) {
         setError(
           err instanceof Error ? err : new Error(ERROR_MESSAGES.PRODUCT.UNKNOWN)
