@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { ProductDetailSkeleton } from '@/presentation/components/ProductDetailSkeleton/ProductDetailSkeleton';
 import { useProductDetailPage } from '@/application/hooks/useProductDetailPage';
@@ -14,6 +14,8 @@ import {
   ProductStock,
   ProductActions,
   ProductDescription,
+  ProductErrorState,
+  ProductNotFoundState,
 } from './components';
 import { SEO } from '@/presentation/components/SEO/SEO';
 
@@ -32,41 +34,23 @@ export const ProductDetailPage: React.FC = () => {
   if (isLoading) return <ProductDetailSkeleton />;
 
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            {UI_STRINGS.COMMON.ERROR}
-          </h1>
-          <p className="text-gray-600 mb-4">{error.message}</p>
-          <Link to="/" className="text-blue-600 underline">
-            {UI_STRINGS.COMMON.BACK_TO_HOME}
-          </Link>
-        </div>
-      </div>
-    );
+    return <ProductErrorState error={error} />;
   }
 
   if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            {UI_STRINGS.PRODUCT_DETAIL.NOT_FOUND}
-          </h1>
-          <Link to="/" className="text-blue-600 underline">
-            {UI_STRINGS.COMMON.BACK_TO_HOME}
-          </Link>
-        </div>
-      </div>
-    );
+    return <ProductNotFoundState />;
   }
+
+  const conditionLabel =
+    product.condition === 'new'
+      ? UI_STRINGS.PRODUCT_CONDITIONS.NEW
+      : UI_STRINGS.PRODUCT_CONDITIONS.USED;
 
   return (
     <div className="max-w-6xl mx-auto p-4">
       <SEO
         title={`${product.title} | Me-Li`}
-        description={`Compre ${product.title} a un excelente precio en Me-Li. ${product.condition === 'new' ? 'Nuevo' : 'Usado'}.`}
+        description={`Compre ${product.title} a un excelente precio en Me-Li. ${conditionLabel}.`}
       />
       <ProductBreadcrumb title={product.title} />
 

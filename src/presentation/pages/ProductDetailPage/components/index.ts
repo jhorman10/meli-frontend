@@ -7,3 +7,5 @@ export * from './ProductShipping';
 export * from './ProductStock';
 export * from './ProductActions';
 export * from './ProductDescription';
+export * from './ProductErrorState';
+export * from './ProductNotFoundState';
