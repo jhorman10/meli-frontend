@@ -13,20 +13,18 @@ export const NoResultsState: React.FC = () => {
             {/* Nuevo layout responsive */}
             <div className="flex flex-col md:flex-row items-start gap-8">
               {/* Columna imagen → solo el espacio necesario */}
-              <div className="shrink-0 flex items-center justify-center">
-                <div className="ui-search-icon ui-search-icon--not-found ui-search-rescue__icon">
-                  <img
-                    id="not_found"
-                    decoding="sync"
-                    src={
-                      notFoundIcon ||
-                      'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
-                    }
-                    className="ui-search-rescue__icon w-16 h-16"
-                    fetchPriority="high"
-                    alt="image not found"
-                  />
-                </div>
+              <div className="shrink-0 self-center flex items-center justify-center">
+                <img
+                  id="not_found"
+                  decoding="sync"
+                  src={
+                    notFoundIcon ||
+                    'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
+                  }
+                  className="w-16 h-16"
+                  fetchPriority="high"
+                  alt="image not found"
+                />
               </div>
 
               {/* Columna texto → ocupa el resto del espacio */}
