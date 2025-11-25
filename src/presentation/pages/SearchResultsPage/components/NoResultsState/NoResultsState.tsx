@@ -27,7 +27,12 @@ export const NoResultsState: React.FC = () => {
                     notFoundIcon ||
                     'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
                   }
-                  style={{ width: '64px', height: '64px', marginLeft: '10px' }}
+                  style={{
+                    width: '64px',
+                    height: '64px',
+                    marginLeft: '50px',
+                    marginRight: '50px',
+                  }}
                   fetchPriority="high"
                   alt="image not found"
                 />
