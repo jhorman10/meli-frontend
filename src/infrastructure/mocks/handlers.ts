@@ -66,23 +66,24 @@ const products = [
     price: 412500,
     currency_id: 'ARS',
     condition: 'used',
-    thumbnail: '/assets/products/iphone_13_midnight_1_1764113702666.png',
+    thumbnail:
+      'https://http2.mlstatic.com/D_NQ_NP_2X_898702-MLA31686376105_082019-F.webp',
     pictures: [
       {
         id: '1',
-        url: '/assets/products/iphone_13_midnight_1_1764113702666.png',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_898702-MLA31686376105_082019-F.webp',
       },
       {
         id: '2',
-        url: '/assets/products/iphone_13_midnight_2_1764113726199.png',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_676246-MLA31686376106_082019-F.webp',
       },
       {
         id: '3',
-        url: '/assets/products/iphone_13_midnight_3_1764113737570.png',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_961137-MLA31686376108_082019-F.webp',
       },
       {
         id: '4',
-        url: '/assets/products/iphone_13_midnight_4_1764113752360.png',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_762345-MLA31686376104_082019-F.webp',
       },
     ],
     shipping: { free_shipping: false },
