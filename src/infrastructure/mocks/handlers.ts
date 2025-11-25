@@ -10,7 +10,26 @@ const products = [
     price: 1367999,
     currency_id: 'ARS',
     condition: 'new',
-    thumbnail: 'https://http2.mlstatic.com/D_123456-MLA0000000000_092023-I.jpg',
+    thumbnail:
+      'https://http2.mlstatic.com/D_NQ_NP_2X_841488-MLA46114990795_052021-F.webp',
+    pictures: [
+      {
+        id: '1',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_841488-MLA46114990795_052021-F.webp',
+      },
+      {
+        id: '2',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_978378-MLA46115014650_052021-F.webp',
+      },
+      {
+        id: '3',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_704662-MLA46114951969_052021-F.webp',
+      },
+      {
+        id: '4',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_916090-MLA46115009009_052021-F.webp',
+      },
+    ],
     installments: { quantity: 12, amount: 113999.92 },
     shipping: { free_shipping: true },
     reviews: { rating_average: 4.9, total: 35 },
@@ -21,7 +40,26 @@ const products = [
     price: 2299000,
     currency_id: 'ARS',
     condition: 'new',
-    thumbnail: 'https://http2.mlstatic.com/D_987654-MLA0000000000_092023-I.jpg',
+    thumbnail:
+      'https://http2.mlstatic.com/D_NQ_NP_2X_618374-MLA75195760214_032024-F.webp',
+    pictures: [
+      {
+        id: '1',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_618374-MLA75195760214_032024-F.webp',
+      },
+      {
+        id: '2',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_821023-MLA75195760213_032024-F.webp',
+      },
+      {
+        id: '3',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_930253-MLA75195746808_032024-F.webp',
+      },
+      {
+        id: '4',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_650838-MLA75195760216_032024-F.webp',
+      },
+    ],
     shipping: { free_shipping: false },
   },
   {
@@ -30,7 +68,26 @@ const products = [
     price: 412500,
     currency_id: 'ARS',
     condition: 'used',
-    thumbnail: 'https://http2.mlstatic.com/D_555555-MLA0000000000_092023-I.jpg',
+    thumbnail:
+      'https://http2.mlstatic.com/D_NQ_NP_2X_711280-MLA40667796994_022020-F.webp',
+    pictures: [
+      {
+        id: '1',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_711280-MLA40667796994_022020-F.webp',
+      },
+      {
+        id: '2',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_659827-MLA40667738997_022020-F.webp',
+      },
+      {
+        id: '3',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_785572-MLA40667797007_022020-F.webp',
+      },
+      {
+        id: '4',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_644996-MLA40667738992_022020-F.webp',
+      },
+    ],
     shipping: { free_shipping: false },
     reviews: { rating_average: 5.0, total: 2 },
   },
@@ -86,14 +143,10 @@ export const handlers = [
         logistic_type: 'fulfillment',
         store_pick_up: false,
       },
-      pictures: [
+      pictures: product.pictures || [
         {
           id: '1',
           url: product.thumbnail,
-        },
-        {
-          id: '2',
-          url: product.thumbnail, // Reusing thumbnail as second image for mock
         },
       ],
       installments: product.installments || {
