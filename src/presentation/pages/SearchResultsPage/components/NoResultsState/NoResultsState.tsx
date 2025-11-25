@@ -13,7 +13,7 @@ export const NoResultsState: React.FC = () => {
             {/* Nuevo layout responsive */}
             <div className="flex flex-col md:flex-row items-stretch gap-8">
               {/* Columna imagen → 30% */}
-              <div className="w-[30] md:w-[30%] flex items-center justify-center">
+              <div className="w-[50] md:w-[30%] flex items-center justify-center">
                 <div className="ui-search-icon ui-search-icon--not-found ui-search-rescue__icon">
                   <img
                     id="not_found"
@@ -30,7 +30,7 @@ export const NoResultsState: React.FC = () => {
               </div>
 
               {/* Columna texto → 70% */}
-              <div className="w-[70] md:w-[70%] text-left font-light tracking-wide flex flex-col justify-center">
+              <div className="w-[50] md:w-[70%] text-left font-light tracking-wide flex flex-col justify-center">
                 <h3 className="text-2xl font-semibold tracking-wide mb-4">
                   {NO_RESULTS.TITLE}
                 </h3>
