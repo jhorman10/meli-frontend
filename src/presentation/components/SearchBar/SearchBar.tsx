@@ -33,22 +33,29 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full px-4 py-3 pr-12 rounded-lg shadow-md border-none focus:ring-2 focus:ring-blue-500 outline-none text-gray-800"
+          className="w-full px-4 py-3 pr-12 shadow-sm border border-gray-300 focus:ring-2 focus:ring-[#3483fa] focus:border-[#3483fa] outline-none text-gray-900"
+          style={{ borderRadius: '2px' }}
           disabled={isLoading}
           aria-label={placeholder}
         />
         <button
           type="submit"
           disabled={isLoading || query.trim().length < 3}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          style={{
+            color: isLoading || query.trim().length < 3 ? undefined : '#3483fa',
+          }}
           aria-label="Buscar"
           title="Buscar"
         >
           {isLoading ? (
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+            <div
+              className="animate-spin rounded-full h-6 w-6 border-b-2"
+              style={{ borderColor: '#3483fa' }}
+            />
           ) : (
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

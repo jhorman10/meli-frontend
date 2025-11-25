@@ -10,14 +10,16 @@ interface ProductCardProps {
 export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
   return (
     <div
-      className="bg-white rounded-lg shadow-sm border border-gray-200 p-5"
+      className="bg-white shadow-sm border border-gray-200 p-5"
+      style={{ borderRadius: '4px' }}
       role="listitem"
     >
       <div className="flex flex-col md:flex-row md:items-start gap-4">
         {/* Imagen del Producto */}
         <Link
           to={`/items/${product.id}`}
-          className="shrink-0 w-32 h-32 bg-gray-50 rounded-lg overflow-hidden"
+          className="shrink-0 w-32 h-32 bg-gray-50 overflow-hidden"
+          style={{ borderRadius: '4px' }}
         >
           <img
             src={product.thumbnail}
@@ -32,7 +34,10 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
           {/* Insignia de Marca */}
           {product.title.toLowerCase().includes('apple') && (
             <div className="mb-2">
-              <span className="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">
+              <span
+                className="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100"
+                style={{ borderRadius: '2px' }}
+              >
                 {UI_STRINGS.PRODUCT_CARD.APPLE_BADGE}
               </span>
             </div>
@@ -41,7 +46,10 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
           {/* Título */}
           <Link
             to={`/items/${product.id}`}
-            className="text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 mb-2"
+            className="text-lg font-medium text-gray-900 transition-colors line-clamp-2 mb-2"
+            style={{ color: 'inherit' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#3483fa')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'inherit')}
           >
             {product.title}
           </Link>
