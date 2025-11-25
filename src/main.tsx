@@ -4,16 +4,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App.tsx';
 import './index.css';
 
-// Inicializar MSW para desarrollo y producción (Vercel)
+// Inicializar MSW solo en desarrollo local
 async function initializeApp() {
-  const enableMocks =
-    import.meta.env.DEV || import.meta.env.VITE_ENABLE_MOCKS === 'true';
+  const enableMocks = import.meta.env.VITE_ENABLE_MOCKS === 'true';
 
   if (enableMocks) {
     try {
       const { worker } = await import('./infrastructure/mocks/browser');
 
-      // CONFIGURACIÓN CORRECTA PARA MSW v2.x
       await worker.start({
         onUnhandledRequest: 'bypass',
         serviceWorker: {
@@ -23,33 +21,14 @@ async function initializeApp() {
             type: 'classic',
           },
         },
-        waitUntilReady: true,
       });
 
-      // VERIFICACIÓN MANUAL PARA IOS
-      console.log('MSW: Inicializando...');
-
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.ready
-          .then((registration) => {
-            console.log(
-              'MSW: Service Worker registrado:',
-              registration.active?.state
-            );
-          })
-          .catch((err) => {
-            console.error('MSW: Error en Service Worker:', err);
-          });
-      }
-
-      // Timeout específico para iOS
-      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        await new Promise((resolve) => setTimeout(resolve, 800));
-        console.log('MSW: Timeout iOS completado');
-      }
+      console.log('🔧 MSW: Mock Service Worker habilitado (desarrollo)');
     } catch (error) {
-      console.error('MSW failed to start:', error);
+      console.error('❌ MSW: Error al inicializar:', error);
     }
+  } else {
+    console.log('🚀 Usando API real en producción');
   }
 
   // Renderizar la app
