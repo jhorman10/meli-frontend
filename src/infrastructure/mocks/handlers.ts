@@ -67,23 +67,23 @@ const products = [
     currency_id: 'ARS',
     condition: 'used',
     thumbnail:
-      'https://http2.mlstatic.com/D_NQ_NP_2X_898702-MLA31686376105_082019-F.webp',
+      'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
     pictures: [
       {
         id: '1',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_898702-MLA31686376105_082019-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
       },
       {
         id: '2',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_676246-MLA31686376106_082019-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
       },
       {
         id: '3',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_961137-MLA31686376108_082019-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
       },
       {
         id: '4',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_762345-MLA31686376104_082019-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
       },
     ],
     shipping: { free_shipping: false },
