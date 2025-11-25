@@ -2,23 +2,44 @@
 @import 'flowbite';
 
 @theme {
+  /* Mercado Libre Official Colors */
+  --color-ml-yellow: #ffe600;
+  --color-ml-yellow-dark: #fff159;
+  --color-ml-blue: #3483fa;
+  --color-ml-blue-dark: #2968c8;
+  --color-ml-blue-darker: #1f4e96;
+
+  /* Primary color scale based on ML Blue */
   --color-primary-50: #e8f4ff;
   --color-primary-100: #d1e9ff;
   --color-primary-200: #a3d3ff;
   --color-primary-300: #75bdff;
   --color-primary-400: #4aa3ff;
-  --color-primary-500: #3483fa;
+  --color-primary-500: #3483fa; /* ML Blue */
   --color-primary-600: #2968c8;
   --color-primary-700: #1f4e96;
   --color-primary-800: #153464;
   --color-primary-900: #0a1a32;
-  --color-accent-yellow: #ffe600;
-  --color-accent-yellow-dark: #fff159;
+
+  /* Text colors */
+  --color-text-primary: rgba(0, 0, 0, 0.9);
+  --color-text-secondary: rgba(0, 0, 0, 0.55);
+
+  /* Font families - Mercado Libre uses Proxima Nova */
+  --font-family-primary:
+    'Proxima Nova', -apple-system, 'Helvetica Neue', Roboto, Arial, sans-serif;
+
+  /* Border radius - ML uses minimal radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
 }
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-gray-50 antialiased;
+    font-family: var(--font-family-primary);
+    color: var(--color-text-primary);
   }
 
   #root {
@@ -27,12 +48,37 @@
 }
 
 @layer components {
+  /* Mercado Libre style primary button */
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+    background-color: var(--color-ml-blue);
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-ml-blue-dark);
+  }
+
+  /* Mercado Libre style yellow button/accent */
+  .btn-yellow {
+    background-color: var(--color-ml-yellow);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-yellow:hover {
+    background-color: var(--color-ml-yellow-dark);
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+    @apply bg-white shadow-sm border border-gray-200 p-6;
+    border-radius: var(--radius-md);
   }
 
   .logo {

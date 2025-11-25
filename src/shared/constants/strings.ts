@@ -13,6 +13,20 @@ export const UI_STRINGS = {
       'La comunidad de compra y venta online más grande de América Latina',
     RELATED_SEARCHES: 'Búsquedas relacionadas:',
     ERROR_TITLE: 'Error al buscar productos',
+    NO_RESULTS: {
+      TITLE: 'No hay publicaciones que coincidan con tu búsqueda.',
+      SUGGESTIONS: {
+        SPELLING: 'Revisa la ortografía',
+        SPELLING_DETAIL: 'de la palabra.',
+        GENERIC: 'Utiliza ',
+        GENERIC_BOLD: 'palabras más genéricas',
+        GENERIC_DETAIL: ' o menos palabras.',
+        CATEGORIES_LINK: 'Navega por las categorías',
+        CATEGORIES_DETAIL: ' para encontrar un producto similar',
+      },
+      CATEGORIES_URL: 'https://www.mercadolibre.com.co/categories.html',
+    },
+    RELATED_SEARCH_TERMS: ['iPhone', 'Samsung', 'Motorola', 'Xiaomi'],
   },
   PRODUCT_DETAIL: {
     BREADCRUMB: {
@@ -60,5 +74,13 @@ export const UI_STRINGS = {
   PRODUCT_CARD: {
     FREE_SHIPPING: 'Envío gratis',
     APPLE_BADGE: 'APPLE',
+  },
+  META: {
+    HOME_DESCRIPTION:
+      'Compre productos con Envío Gratis en el día en Mercado Libre Argentina. Encuentre miles de marcas y productos a precios increíbles.',
+  },
+  PRODUCT_CONDITIONS: {
+    NEW: 'Nuevo',
+    USED: 'Usado',
   },
 };
