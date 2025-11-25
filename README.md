@@ -260,14 +260,30 @@ yarn test:coverage
 
 ---
 
-## ⚡ Performance
+## ⚡ Performance y Optimizaciones
 
-### 🚀 **Optimizaciones**
+El proyecto implementa múltiples estrategias para garantizar una experiencia de usuario fluida y eficiente:
 
-- **Lazy Loading:** Carga diferida de imágenes y componentes no críticos.
-- **Code Splitting:** División de código automática por rutas con Vite.
-- **Debounce:** Optimización de llamadas a la API en la búsqueda.
-- **Memoización:** Uso de `useMemo` y `useCallback` para evitar re-renderizados innecesarios.
+### 🔄 **Memoización y Control de Renderizado**
+
+- **`React.memo`**: Se aplica en componentes de lista y tarjetas (`ProductList`, `ProductCard`, `ProductGallery`) para prevenir re-renderizados innecesarios cuando las props no cambian. Esto es crítico en listas largas de productos.
+- **`useMemo`**: Utilizado en `ProductGallery` para memorizar operaciones costosas, como el recorte (`slice`) del array de imágenes para las miniaturas, asegurando que solo se recalcule cuando las imágenes cambian.
+- **`useCallback`**: Implementado en hooks personalizados (como `useSearchProducts`) para memorizar funciones de búsqueda y manejadores de eventos, manteniendo la estabilidad de las referencias y evitando efectos secundarios no deseados en componentes hijos.
+
+### ⏱️ **Optimización de Búsqueda (Debounce)**
+
+- **`useDebounce`**: Se implementó un custom hook de debounce para retrasar la ejecución de la búsqueda automática.
+- **Integración en `useSearchBar`**: Permite que la búsqueda se dispare automáticamente solo después de que el usuario ha dejado de escribir por 500ms, reduciendo drásticamente las llamadas innecesarias a la API y mejorando la respuesta de la interfaz.
+
+### 📦 **Carga Diferida (Lazy Loading & Code Splitting)**
+
+- **Rutas**: Uso de `React.lazy` y `Suspense` en `AppRouter` para dividir el código por rutas (`SearchPage`, `SearchResultsPage`, `ProductDetailPage`). El usuario solo descarga el JavaScript necesario para la página que está visitando.
+- **Imágenes**: Atributo `loading="lazy"` en todas las etiquetas `<img>` (especialmente en `ProductCard` y `ProductGallery`) para diferir la carga de imágenes fuera del viewport, ahorrando ancho de banda y acelerando el tiempo de carga inicial (LCP).
+
+### 🎨 **Otras Mejoras**
+
+- **Skeletons**: Implementación de estados de carga visuales (`ProductCardSkeleton`, `ProductDetailSkeleton`) para mejorar la percepción de velocidad (CLS) y evitar saltos de contenido.
+- **Virtualización (Preparado)**: La estructura de `ProductList` está diseñada para facilitar la integración futura de virtualización (windowing) si el dataset crece significativamente.
 
 ---
 
