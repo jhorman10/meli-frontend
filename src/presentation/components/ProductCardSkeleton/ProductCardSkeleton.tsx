@@ -2,10 +2,10 @@ import React from 'react';
 
 export const ProductCardSkeleton: React.FC = () => {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 animate-pulse">
+    <div className="bg-white rounded-sm shadow-sm border border-gray-200 p-5 animate-pulse">
       <div className="flex flex-col md:flex-row md:items-start gap-4">
         {/* Esqueleto de imagen */}
-        <div className="shrink-0 w-32 h-32 bg-gray-200 rounded-lg" />
+        <div className="shrink-0 w-32 h-32 bg-gray-200 rounded" />
 
         {/* Esqueleto de información del producto */}
         <div className="flex-1 space-y-3">
