@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getProductService } from '@/application/di/providers';
-import type { ProductDetailsDTO } from '@/application/dto/ProductDTO';
+import { getProductService } from '@/application/di';
+import type { ProductDetailsDTO } from '@/application/dto';
 import { ERROR_MESSAGES } from '@/shared/constants';
 
 /**

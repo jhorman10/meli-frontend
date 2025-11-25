@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ProductCard } from '@/presentation/components/ProductCard/ProductCard';
-import { ProductCardSkeleton } from '@/presentation/components/ProductCardSkeleton/ProductCardSkeleton';
+import { ProductList } from '@/presentation/components/ProductList/ProductList';
 import { useSearchResultsPage } from '@/application/hooks/useSearchResultsPage';
 import { UI_STRINGS } from '@/shared/constants';
 import { SEO } from '@/presentation/components/SEO/SEO';
@@ -15,9 +14,7 @@ export const SearchResultsPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="max-w-5xl mx-auto p-4">
-        {[...Array(4)].map((_, i) => (
-          <ProductCardSkeleton key={i} />
-        ))}
+        <ProductList products={[]} isLoading={true} />
       </div>
     );
   }
@@ -116,11 +113,7 @@ export const SearchResultsPage: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex flex-col gap-2">
-        {results.products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <ProductList products={results.products} isLoading={isLoading} />
     </div>
   );
 };

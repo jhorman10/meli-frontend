@@ -1,6 +1,5 @@
 import { Container } from './Container';
-import type { ProductService } from '../services/ProductService';
-import type { SearchService } from '../services/SearchService';
+import type { ProductService, SearchService } from '../services';
 
 /**
  * Proveedores de Servicios

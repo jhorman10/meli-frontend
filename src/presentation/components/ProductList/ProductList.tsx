@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductCardSkeleton } from '@/presentation/components/ProductCardSkeleton/ProductCardSkeleton';
-import type { ProductDTO } from '@/application/dto/ProductDTO';
+import type { ProductDTO } from '@/application/dto';
 import { ProductCard } from '../ProductCard/ProductCard';
 
 interface ProductListProps {
