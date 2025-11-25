@@ -135,4 +135,23 @@ describe('ProductGallery', () => {
       expect(img).toHaveAttribute('loading', 'lazy');
     });
   });
+
+  it('should open lightbox when main image is clicked', () => {
+    render(
+      <ProductGallery
+        pictures={mockPictures}
+        thumbnail="https://example.com/thumb.jpg"
+        title="iPhone 13"
+        selectedImage={{ id: '1', url: 'https://example.com/1.jpg' }}
+        onImageSelect={mockOnImageSelect}
+      />
+    );
+
+    const mainImageContainer = screen.getByAltText('iPhone 13').parentElement;
+    fireEvent.click(mainImageContainer!);
+
+    // Check if lightbox is present (e.g., by checking for the close button)
+    const closeButton = screen.getByLabelText('Close lightbox');
+    expect(closeButton).toBeInTheDocument();
+  });
 });
