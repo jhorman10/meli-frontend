@@ -10,24 +10,23 @@ const products = [
     price: 1367999,
     currency_id: 'ARS',
     condition: 'new',
-    thumbnail:
-      'https://http2.mlstatic.com/D_NQ_NP_2X_841488-MLA46114990795_052021-F.webp',
+    thumbnail: '/assets/products/iphone_13_midnight_1_1764113702666.png',
     pictures: [
       {
         id: '1',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_841488-MLA46114990795_052021-F.webp',
+        url: '/assets/products/iphone_13_midnight_1_1764113702666.png',
       },
       {
         id: '2',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_978378-MLA46115014650_052021-F.webp',
+        url: '/assets/products/iphone_13_midnight_2_1764113726199.png',
       },
       {
         id: '3',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_704662-MLA46114951969_052021-F.webp',
+        url: '/assets/products/iphone_13_midnight_3_1764113737570.png',
       },
       {
         id: '4',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_916090-MLA46115009009_052021-F.webp',
+        url: '/assets/products/iphone_13_midnight_4_1764113752360.png',
       },
     ],
     installments: { quantity: 12, amount: 113999.92 },
@@ -40,24 +39,23 @@ const products = [
     price: 2299000,
     currency_id: 'ARS',
     condition: 'new',
-    thumbnail:
-      'https://http2.mlstatic.com/D_NQ_NP_2X_618374-MLA75195760214_032024-F.webp',
+    thumbnail: '/assets/products/iphone_16_pro_max_1_1764113771097.png',
     pictures: [
       {
         id: '1',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_618374-MLA75195760214_032024-F.webp',
+        url: '/assets/products/iphone_16_pro_max_1_1764113771097.png',
       },
       {
         id: '2',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_821023-MLA75195760213_032024-F.webp',
+        url: '/assets/products/iphone_16_pro_max_2_1764113783868.png',
       },
       {
         id: '3',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_930253-MLA75195746808_032024-F.webp',
+        url: '/assets/products/iphone_16_pro_max_3_1764113795529.png',
       },
       {
         id: '4',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_650838-MLA75195760216_032024-F.webp',
+        url: '/assets/products/iphone_16_pro_max_1_1764113771097.png',
       },
     ],
     shipping: { free_shipping: false },
@@ -68,24 +66,23 @@ const products = [
     price: 412500,
     currency_id: 'ARS',
     condition: 'used',
-    thumbnail:
-      'https://http2.mlstatic.com/D_NQ_NP_2X_711280-MLA40667796994_022020-F.webp',
+    thumbnail: '/assets/products/iphone_13_midnight_1_1764113702666.png',
     pictures: [
       {
         id: '1',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_711280-MLA40667796994_022020-F.webp',
+        url: '/assets/products/iphone_13_midnight_1_1764113702666.png',
       },
       {
         id: '2',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_659827-MLA40667738997_022020-F.webp',
+        url: '/assets/products/iphone_13_midnight_2_1764113726199.png',
       },
       {
         id: '3',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_785572-MLA40667797007_022020-F.webp',
+        url: '/assets/products/iphone_13_midnight_3_1764113737570.png',
       },
       {
         id: '4',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_644996-MLA40667738992_022020-F.webp',
+        url: '/assets/products/iphone_13_midnight_4_1764113752360.png',
       },
     ],
     shipping: { free_shipping: false },
