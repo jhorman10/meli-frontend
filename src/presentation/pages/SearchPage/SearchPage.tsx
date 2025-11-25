@@ -9,10 +9,7 @@ export const SearchPage: React.FC = () => {
   const { handleSearch } = useSearchPage();
 
   return (
-    <div
-      className="flex flex-col items-center justify-center min-h-screen p-4"
-      style={{ backgroundColor: '#f5f5f5' }}
-    >
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <SEO
         title={UI_STRINGS.SEARCH.TITLE}
         description="Compre productos con Envío Gratis en el día en Mercado Libre Argentina. Encuentre miles de marcas y productos a precios increíbles."

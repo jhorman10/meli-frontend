@@ -12,7 +12,7 @@ export const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Header con barra de búsqueda - ML Yellow */}
       <div
         className="p-4 border-b border-gray-200"

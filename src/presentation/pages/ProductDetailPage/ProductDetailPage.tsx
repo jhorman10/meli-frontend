@@ -67,7 +67,7 @@ export const ProductDetailPage: React.FC = () => {
         </div>
 
         {/* ================= COLUMNA DERECHA - Información del Producto ================= */}
-        <div className="md:w-1/2 rounded-lg shadow-sm m-4 p-4 text-left">
+        <div className="md:w-1/2 bg-white rounded-lg shadow-sm m-4 p-4 text-left">
           <ProductHeader
             condition={product.condition}
             soldQuantity={product.soldQuantity}

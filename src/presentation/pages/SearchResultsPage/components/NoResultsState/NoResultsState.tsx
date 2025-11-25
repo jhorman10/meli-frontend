@@ -6,12 +6,14 @@ export const NoResultsState: React.FC = () => {
   const { NO_RESULTS } = UI_STRINGS.SEARCH;
 
   return (
-    <main role="main" id="root-app" className="bg-gray-100 min-h-screen p-4">
+    <main role="main" id="root-app" className="min-h-screen p-4">
       <div className="pt-8 max-w-5xl mx-auto">
-        <div className="bg-white rounded-sm p-8 shadow-sm">
+        <div className="bg-white rounded-sm p-2 shadow-sm">
           <div className="ui-search">
-            <div className="ui-search-rescue ui-search-rescue--zrp">
-              <div className="ui-search-rescue__icon">
+            {/* Nuevo layout responsive */}
+            <div className="flex flex-col md:flex-row items-stretch gap-8">
+              {/* Columna imagen */}
+              <div className="w-full md:w-1/3 flex items-center justify-center">
                 <div className="ui-search-icon ui-search-icon--not-found ui-search-rescue__icon">
                   <img
                     id="not_found"
@@ -26,19 +28,26 @@ export const NoResultsState: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="ui-search-rescue__info">
-                <h3 className="ui-search-rescue__title">{NO_RESULTS.TITLE}</h3>
-                <ul className="ui-search-rescue__list">
-                  <li className="ui-search-rescue__item">
+
+              {/* Columna texto */}
+              <div className="w-full md:w-2/3 text-left font-light tracking-wide flex flex-col justify-center">
+                <h3 className="text-3xl font-light tracking-wide mb-4">
+                  {NO_RESULTS.TITLE}
+                </h3>
+
+                <ul className="list-disc pl-5 space-y-3">
+                  <li>
                     <strong>{NO_RESULTS.SUGGESTIONS.SPELLING}</strong>{' '}
                     {NO_RESULTS.SUGGESTIONS.SPELLING_DETAIL}
                   </li>
-                  <li className="ui-search-rescue__item">
+
+                  <li>
                     {NO_RESULTS.SUGGESTIONS.GENERIC}
                     <strong>{NO_RESULTS.SUGGESTIONS.GENERIC_BOLD}</strong>
                     {NO_RESULTS.SUGGESTIONS.GENERIC_DETAIL}
                   </li>
-                  <li className="ui-search-rescue__item">
+
+                  <li>
                     <a href={NO_RESULTS.CATEGORIES_URL}>
                       {NO_RESULTS.SUGGESTIONS.CATEGORIES_LINK}
                     </a>{' '}
