@@ -28,8 +28,8 @@ export const NoResultsState: React.FC = () => {
               </div>
 
               {/* Columna texto → ocupa el resto del espacio */}
-              <div className="flex-1 text-left font-light tracking-wide flex flex-col justify-center">
-                <h3 className="text-2xl font-semibold tracking-wide mb-4">
+              <div className="flex-1 text-left font-light flex flex-col justify-center">
+                <h3 className="text-2xl font-semibold mb-4">
                   {NO_RESULTS.TITLE}
                 </h3>
 
