@@ -7,7 +7,7 @@ interface ProductCardProps {
   product: ProductDTO;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
   return (
     <div
       className="bg-white rounded-lg shadow-sm border border-gray-200 p-5"
@@ -123,4 +123,4 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
     </div>
   );
-};
+});
