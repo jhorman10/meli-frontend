@@ -37,7 +37,7 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "http://localhost:3001",
+    "VITE_API_URL": "https://api.meli-frontend.com",
     "VITE_ENABLE_MOCKS": "true"
   }
 }
