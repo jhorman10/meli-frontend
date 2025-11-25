@@ -11,7 +11,7 @@ export const NoResultsState: React.FC = () => {
         <div className="bg-white rounded-sm p-6 shadow-sm">
           <div className="ui-search">
             {/* Nuevo layout responsive */}
-            <div className="flex flex-col md:flex-row items-start gap-8">
+            <div className="flex flex-col md:flex-row items-start gap-6">
               {/* Columna imagen → solo el espacio necesario */}
               <div className="shrink-0 self-center flex items-center justify-center">
                 <img
