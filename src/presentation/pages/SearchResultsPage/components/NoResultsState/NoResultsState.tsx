@@ -8,16 +8,10 @@ export const NoResultsState: React.FC = () => {
   return (
     <main role="main" id="root-app" className="min-h-screen pt-16 p-4">
       <div className="pt-8 max-w-5xl mx-auto">
-        <div
-          className="bg-white rounded-sm shadow-sm"
-          style={{ padding: '32px' }}
-        >
+        <div className="bg-white rounded-sm shadow-sm p-[32px]">
           <div className="ui-search">
             {/* Nuevo layout responsive */}
-            <div
-              className="flex flex-col md:flex-row items-start"
-              style={{ gap: '32px' }}
-            >
+            <div className="flex flex-col md:flex-row items-start gap-[32px]">
               {/* Columna imagen → solo el espacio necesario */}
               <div className="shrink-0 self-center flex items-center justify-center">
                 <img
@@ -27,12 +21,7 @@ export const NoResultsState: React.FC = () => {
                     notFoundIcon ||
                     'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
                   }
-                  style={{
-                    width: '64px',
-                    height: '64px',
-                    marginLeft: '50px',
-                    marginRight: '50px',
-                  }}
+                  className="w-[64px] h-[64px] mx-[50px]"
                   fetchPriority="high"
                   alt="image not found"
                 />
