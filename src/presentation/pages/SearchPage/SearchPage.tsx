@@ -18,6 +18,7 @@ export const SearchPage: React.FC = () => {
         description="Compre productos con Envío Gratis en el día en Mercado Libre Argentina. Encuentre miles de marcas y productos a precios increíbles."
       />
       <div className="w-full max-w-lg text-center">
+        <h1 className="sr-only">{UI_STRINGS.SEARCH.TITLE}</h1>
         <img
           src={logoLargePlus}
           alt="Mercado Libre"

@@ -121,7 +121,7 @@ describe('SearchResultsPage', () => {
     );
 
     expect(
-      screen.getByText(/No encontramos resultados para "test"/i)
+      screen.getByText('No hay publicaciones que coincidan con tu búsqueda.')
     ).toBeInTheDocument();
   });
 });

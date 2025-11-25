@@ -61,10 +61,12 @@ describe('SearchPage', () => {
   });
 
   it('should render subtitle', () => {
-    const { container } = renderWithRouter(<SearchPage />);
+    renderWithRouter(<SearchPage />);
 
-    // Check for subtitle paragraph
-    const subtitle = container.querySelector('p.text-gray-600');
+    // Check for subtitle text
+    const subtitle = screen.getByText(
+      'La comunidad de compra y venta online más grande de América Latina'
+    );
     expect(subtitle).toBeInTheDocument();
   });
 

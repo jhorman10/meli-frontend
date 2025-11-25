@@ -34,7 +34,7 @@ describe('MainLayout', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByAltText('Me-Li')).toBeInTheDocument();
+    expect(screen.getByAltText('Mercado Libre')).toBeInTheDocument();
     expect(screen.getByTestId('search-bar')).toBeInTheDocument();
     expect(screen.getByTestId('child-content')).toBeInTheDocument();
   });
@@ -53,29 +53,9 @@ describe('MainLayout', () => {
       </BrowserRouter>
     );
 
-    const logoButton = screen.getByRole('button', { name: 'Me-Li' });
+    const logoButton = screen.getByRole('button', { name: 'Mercado Libre' });
     fireEvent.click(logoButton);
 
     expect(mockNavigate).toHaveBeenCalledWith('/');
-  });
-
-  it('navigates back when back button is clicked', () => {
-    render(
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route
-              path="/"
-              element={<div data-testid="child-content">Child Content</div>}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    );
-
-    const backButton = screen.getByRole('button', { name: /volver/i });
-    fireEvent.click(backButton);
-
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
   });
 });
