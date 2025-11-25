@@ -54,7 +54,7 @@ export const ProductDetailPage: React.FC = () => {
       />
       <ProductBreadcrumb title={product.title} />
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col md:flex-row p-8 gap-8 bg-white rounded-lg">
         {/* ================= COLUMNA IZQUIERDA - Imágenes del Producto ================= */}
         <div className="md:w-1/2">
           <ProductGallery
@@ -67,7 +67,7 @@ export const ProductDetailPage: React.FC = () => {
         </div>
 
         {/* ================= COLUMNA DERECHA - Información del Producto ================= */}
-        <div className="md:w-1/2 bg-white rounded-lg shadow-sm m-4 p-4 text-left">
+        <div className="md:w-1/2 bg-white rounded-lg shadow-sm p-4 text-left">
           <ProductHeader
             condition={product.condition}
             soldQuantity={product.soldQuantity}
