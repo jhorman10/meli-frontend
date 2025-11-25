@@ -20,7 +20,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="https://example.com/thumb.jpg"
         title="iPhone 13"
-        selectedImage="https://example.com/1.jpg"
+        selectedImage={{ id: '1', url: 'https://example.com/1.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -36,7 +36,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="https://example.com/thumb.jpg"
         title="iPhone 13"
-        selectedImage="https://example.com/1.jpg"
+        selectedImage={{ id: '1', url: 'https://example.com/1.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -51,7 +51,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="https://example.com/thumb.jpg"
         title="iPhone 13"
-        selectedImage="https://example.com/1.jpg"
+        selectedImage={{ id: '1', url: 'https://example.com/1.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -59,7 +59,10 @@ describe('ProductGallery', () => {
     const thumbnails = screen.getAllByRole('button');
     fireEvent.click(thumbnails[1]);
 
-    expect(mockOnImageSelect).toHaveBeenCalledWith('https://example.com/2.jpg');
+    expect(mockOnImageSelect).toHaveBeenCalledWith({
+      id: '2',
+      url: 'https://example.com/2.jpg',
+    });
   });
 
   it('should highlight selected image thumbnail', () => {
@@ -68,7 +71,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="https://example.com/thumb.jpg"
         title="iPhone 13"
-        selectedImage="https://example.com/2.jpg"
+        selectedImage={{ id: '2', url: 'https://example.com/2.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -83,7 +86,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="https://example.com/thumb.jpg"
         title="iPhone 13"
-        selectedImage=""
+        selectedImage={null}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -107,7 +110,7 @@ describe('ProductGallery', () => {
         pictures={manyPictures}
         thumbnail="thumb.jpg"
         title="Product"
-        selectedImage="url1.jpg"
+        selectedImage={{ id: '1', url: 'url1.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );
@@ -122,7 +125,7 @@ describe('ProductGallery', () => {
         pictures={mockPictures}
         thumbnail="thumb.jpg"
         title="Product"
-        selectedImage="url1.jpg"
+        selectedImage={{ id: '1', url: 'url1.jpg' }}
         onImageSelect={mockOnImageSelect}
       />
     );

@@ -62,7 +62,10 @@ describe('useProductDetailPage', () => {
 
     expect(result.current.product).toEqual(mockProductDetails);
     expect(result.current.error).toBeNull();
-    expect(result.current.selectedImage).toBe('https://example.com/1.jpg');
+    expect(result.current.selectedImage).toEqual({
+      id: '1',
+      url: 'https://example.com/1.jpg',
+    });
   });
 
   it('should set thumbnail as selectedImage when no pictures', async () => {
@@ -78,7 +81,10 @@ describe('useProductDetailPage', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.selectedImage).toBe('https://example.com/thumb.jpg');
+    expect(result.current.selectedImage).toEqual({
+      id: 'thumbnail',
+      url: 'https://example.com/thumb.jpg',
+    });
   });
 
   it('should handle invalid product ID', async () => {
@@ -130,15 +136,24 @@ describe('useProductDetailPage', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.selectedImage).toBe('https://example.com/1.jpg');
+    expect(result.current.selectedImage).toEqual({
+      id: '1',
+      url: 'https://example.com/1.jpg',
+    });
 
     // Change selected image
     await waitFor(() => {
-      result.current.setSelectedImage('https://example.com/2.jpg');
+      result.current.setSelectedImage({
+        id: '2',
+        url: 'https://example.com/2.jpg',
+      });
     });
 
     await waitFor(() => {
-      expect(result.current.selectedImage).toBe('https://example.com/2.jpg');
+      expect(result.current.selectedImage).toEqual({
+        id: '2',
+        url: 'https://example.com/2.jpg',
+      });
     });
   });
 
