@@ -2,6 +2,7 @@ import type { ProductRepository } from '@/domain/repositories/ProductRepository'
 import { ProductAPI } from '@/infrastructure/api/ProductAPI';
 import { ProductService } from '../services/ProductService';
 import { SearchService } from '../services/SearchService';
+import { getApiUrl } from '@/shared/config/env';
 
 /**
  * Contenedor de Inyección de Dependencias
@@ -30,9 +31,7 @@ export class Container {
    */
   getProductRepository(): ProductRepository {
     if (!this.productRepository) {
-      this.productRepository = new ProductAPI(
-        (import.meta.env.VITE_API_URL as string) || 'http://localhost:3001'
-      );
+      this.productRepository = new ProductAPI(getApiUrl());
     }
     return this.productRepository;
   }
