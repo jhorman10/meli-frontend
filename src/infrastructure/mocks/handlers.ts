@@ -75,15 +75,11 @@ const products = [
       },
       {
         id: '2',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_972981-MLU78083881050_082024-F.webp',
       },
       {
         id: '3',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
-      },
-      {
-        id: '4',
-        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_730653-MLA44156537619_112020-F.webp',
+        url: 'https://http2.mlstatic.com/D_NQ_NP_2X_986737-MLA44156542369_112020-F.webp',
       },
     ],
     shipping: { free_shipping: false },
