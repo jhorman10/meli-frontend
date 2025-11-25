@@ -62,20 +62,26 @@ export const handlers = [
   }),
 
   http.get(`${API_BASE_URL}/items/:id`, ({ params }) => {
+    const { id } = params;
+    const product = products.find((p) => p.id === id);
+
+    if (!product) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
     return HttpResponse.json({
-      id: params.id as string,
-      title: 'Apple iPhone 16 Pro (256gb) - Nuevo - Liberado - Caja Sellada',
-      price: 2509380.59,
-      original_price: 3023244.99,
-      currency_id: 'ARS',
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      original_price: product.price * 1.2, // Mock original price
+      currency_id: product.currency_id,
       available_quantity: 3,
       sold_quantity: 5,
-      condition: 'new',
-      permalink: 'https://www.mercadolibre.com.ar/p/MLA998877665',
-      thumbnail:
-        'https://http2.mlstatic.com/D_987654-MLA0000000000_092023-I.jpg',
+      condition: product.condition,
+      permalink: `https://www.mercadolibre.com.ar/p/${product.id}`,
+      thumbnail: product.thumbnail,
       shipping: {
-        free_shipping: true,
+        free_shipping: product.shipping.free_shipping,
         mode: 'me2',
         logistic_type: 'fulfillment',
         store_pick_up: false,
@@ -83,18 +89,18 @@ export const handlers = [
       pictures: [
         {
           id: '1',
-          url: 'https://http2.mlstatic.com/D_987654-MLA0000000000_092023-I.jpg',
+          url: product.thumbnail,
         },
         {
           id: '2',
-          url: 'https://http2.mlstatic.com/D_876543-MLA0000000000_092023-I.jpg',
+          url: product.thumbnail, // Reusing thumbnail as second image for mock
         },
       ],
-      installments: {
+      installments: product.installments || {
         quantity: 9,
-        amount: 278820.07,
+        amount: product.price / 9,
         rate: 0,
-        currency_id: 'ARS',
+        currency_id: product.currency_id,
       },
       seller_address: {
         city: {
@@ -113,22 +119,16 @@ export const handlers = [
         {
           id: 'MODEL',
           name: 'Modelo',
-          value_name: 'iPhone 16 Pro',
-        },
-        {
-          id: 'STORAGE_CAPACITY',
-          name: 'Capacidad de almacenamiento',
-          value_name: '256 GB',
+          value_name: product.title,
         },
       ],
       warranty: 'Garantía del vendedor: 3 meses',
       description: {
-        plain_text:
-          'El iPhone 14 viene con el sistema de dos cámaras más impresionante en un iPhone 14, para que tomes fotos espectaculares con mucha o poca luz. Y te da más tranquilidad gracias a una funcionalidad de seguridad que salva vidas.',
+        plain_text: `Descripción detallada del producto ${product.title}. Este es un producto excelente con características increíbles.`,
       },
-      reviews: {
-        rating_average: 5.0,
-        total: 1,
+      reviews: product.reviews || {
+        rating_average: 0,
+        total: 0,
       },
     });
   }),
