@@ -37,7 +37,7 @@
 
 @layer base {
   body {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.08);
     @apply antialiased;
     font-family: var(--font-family-primary);
     color: var(--color-text-primary);
