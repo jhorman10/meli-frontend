@@ -12,8 +12,8 @@ export const NoResultsState: React.FC = () => {
           <div className="ui-search">
             {/* Nuevo layout responsive */}
             <div className="flex flex-col md:flex-row items-start gap-8">
-              {/* Columna imagen → 30% (aprox 33% con w-1/3) */}
-              <div className="w-full md:w-1/3 shrink-0 flex items-center justify-center">
+              {/* Columna imagen → solo el espacio necesario */}
+              <div className="shrink-0 flex items-center justify-center">
                 <div className="ui-search-icon ui-search-icon--not-found ui-search-rescue__icon">
                   <img
                     id="not_found"
@@ -22,15 +22,15 @@ export const NoResultsState: React.FC = () => {
                       notFoundIcon ||
                       'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
                     }
-                    className="ui-search-rescue__icon max-w-full h-auto"
+                    className="ui-search-rescue__icon w-16 h-16"
                     fetchPriority="high"
                     alt="image not found"
                   />
                 </div>
               </div>
 
-              {/* Columna texto → 70% (aprox 67% con w-2/3) */}
-              <div className="w-full md:w-2/3 shrink-0 text-left font-light tracking-wide flex flex-col justify-center">
+              {/* Columna texto → ocupa el resto del espacio */}
+              <div className="flex-1 text-left font-light tracking-wide flex flex-col justify-center">
                 <h3 className="text-2xl font-semibold tracking-wide mb-4">
                   {NO_RESULTS.TITLE}
                 </h3>
