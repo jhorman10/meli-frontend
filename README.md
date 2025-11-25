@@ -169,11 +169,13 @@ src/
 │   ├─ repositories/     # Interfaces de repositorio
 │   └─ use-cases/        # Casos de uso (GetProductById, SearchProducts)
 ├─ infrastructure/
-│   └─ api/              # ProductAPI, SearchAPI
+│   ├─ api/              # Clientes HTTP (ProductAPI)
+│   └─ mocks/            # Mock Service Worker handlers
 ├─ presentation/
-│   ├─ layout/           # Layout global (MainLayout)
+│   ├─ components/       # UI reusable (SearchBar, ProductCard, SEO, …)
+│   ├─ layouts/          # Layouts globales (MainLayout)
 │   ├─ pages/            # SearchPage, SearchResultsPage, ProductDetailPage
-│   └─ components/       # UI reusable (SearchBar, ProductCard, SEO, …)
+│   └─ router/           # Configuración de rutas (AppRouter)
 ├─ shared/
 │   ├─ constants/        # strings, currency, error messages
 │   └─ utils/            # formatters, calculations
