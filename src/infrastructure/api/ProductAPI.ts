@@ -19,7 +19,12 @@ export class ProductAPI implements ProductRepository {
   }
 
   async search(params: SearchParams): Promise<SearchResult> {
-    const url = new URL(`${this.baseURL}/items`);
+    const url = new URL(
+      `${this.baseURL}/items`,
+      typeof window !== 'undefined'
+        ? window.location.origin
+        : 'http://localhost'
+    );
     url.searchParams.set('q', params.query);
 
     if (params.limit) {
