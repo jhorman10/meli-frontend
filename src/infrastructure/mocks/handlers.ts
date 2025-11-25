@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 // Usar variable de entorno para la base URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 const products = [
   {
