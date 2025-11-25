@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { SearchResultsPage } from '@/presentation/pages/SearchResultsPage/SearchResultsPage';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { SearchResultDTO } from '@/application/dto/SearchResultDTO';
+import { UI_STRINGS } from '@/shared/constants';
 
 // Mock dependencies
 const mockUseSearchResultsPage = jest.fn();
@@ -122,6 +123,17 @@ describe('SearchResultsPage', () => {
 
     expect(
       screen.getByText('No hay publicaciones que coincidan con tu búsqueda.')
+    ).toBeInTheDocument();
+
+    // Verify suggestions are rendered
+    expect(
+      screen.getByText(UI_STRINGS.SEARCH.NO_RESULTS.SUGGESTIONS.SPELLING)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(UI_STRINGS.SEARCH.NO_RESULTS.SUGGESTIONS.GENERIC_BOLD)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(UI_STRINGS.SEARCH.NO_RESULTS.SUGGESTIONS.CATEGORIES_LINK)
     ).toBeInTheDocument();
   });
 });

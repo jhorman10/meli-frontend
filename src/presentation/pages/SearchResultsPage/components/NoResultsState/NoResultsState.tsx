@@ -6,14 +6,14 @@ export const NoResultsState: React.FC = () => {
   const { NO_RESULTS } = UI_STRINGS.SEARCH;
 
   return (
-    <main role="main" id="root-app" className="min-h-screen p-4">
+    <main role="main" id="root-app" className="min-h-screen pt-16 p-4">
       <div className="pt-8 max-w-5xl mx-auto">
-        <div className="bg-white rounded-sm p-2 shadow-sm">
+        <div className="bg-white rounded-sm p-8 md:p-2 shadow-sm">
           <div className="ui-search">
             {/* Nuevo layout responsive */}
             <div className="flex flex-col md:flex-row items-stretch gap-8">
-              {/* Columna imagen */}
-              <div className="w-full md:w-1/3 flex items-center justify-center">
+              {/* Columna imagen → 30% */}
+              <div className="w-full md:w-[30%] flex items-center justify-center">
                 <div className="ui-search-icon ui-search-icon--not-found ui-search-rescue__icon">
                   <img
                     id="not_found"
@@ -29,9 +29,9 @@ export const NoResultsState: React.FC = () => {
                 </div>
               </div>
 
-              {/* Columna texto */}
-              <div className="w-full md:w-2/3 text-left font-light tracking-wide flex flex-col justify-center">
-                <h3 className="text-3xl font-light tracking-wide mb-4">
+              {/* Columna texto → 70% */}
+              <div className="w-full md:w-[70%] text-left font-light tracking-wide flex flex-col justify-center">
+                <h3 className="text-2xl font-semibold tracking-wide mb-4">
                   {NO_RESULTS.TITLE}
                 </h3>
 
@@ -48,7 +48,10 @@ export const NoResultsState: React.FC = () => {
                   </li>
 
                   <li>
-                    <a href={NO_RESULTS.CATEGORIES_URL}>
+                    <a
+                      href={NO_RESULTS.CATEGORIES_URL}
+                      className="text-blue-600"
+                    >
                       {NO_RESULTS.SUGGESTIONS.CATEGORIES_LINK}
                     </a>{' '}
                     {NO_RESULTS.SUGGESTIONS.CATEGORIES_DETAIL}
