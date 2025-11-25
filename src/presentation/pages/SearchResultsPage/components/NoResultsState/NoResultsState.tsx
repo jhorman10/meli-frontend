@@ -8,7 +8,7 @@ export const NoResultsState: React.FC = () => {
   return (
     <main role="main" id="root-app" className="min-h-screen pt-16 p-4">
       <div className="pt-8 max-w-5xl mx-auto">
-        <div className="bg-white rounded-sm p-8 md:p-2 shadow-sm">
+        <div className="bg-white rounded-sm p-6 shadow-sm">
           <div className="ui-search">
             {/* Nuevo layout responsive */}
             <div className="flex flex-col md:flex-row items-start gap-8">
@@ -21,7 +21,7 @@ export const NoResultsState: React.FC = () => {
                     notFoundIcon ||
                     'https://http2.mlstatic.com/frontend-assets/search-nordic/not-found.svg'
                   }
-                  className="w-16 h-16"
+                  className="w-16 h-16 ml-2.5"
                   fetchPriority="high"
                   alt="image not found"
                 />
@@ -33,7 +33,7 @@ export const NoResultsState: React.FC = () => {
                   {NO_RESULTS.TITLE}
                 </h3>
 
-                <ul className="list-disc pl-5 space-y-3">
+                <ul className="list-disc pl-5 space-y-1">
                   <li>
                     <strong>{NO_RESULTS.SUGGESTIONS.SPELLING}</strong>{' '}
                     {NO_RESULTS.SUGGESTIONS.SPELLING_DETAIL}
