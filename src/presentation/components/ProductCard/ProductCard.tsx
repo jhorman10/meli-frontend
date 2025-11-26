@@ -9,20 +9,22 @@ interface ProductCardProps {
 
 export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
   return (
-    <div
+    <Link
+      to={`/items/${product.id}`}
       className="
+        block
         bg-white shadow-sm border border-gray-200 p-4
         h-[250px]           /* MOBILE */
         md:h-auto           /* DESKTOP */
         text-left
+        hover:shadow-md transition-shadow duration-200
       "
-      style={{ borderRadius: '4px' }}
-      role="listitem"
+      style={{ borderRadius: '4px', textDecoration: 'none' }}
+      aria-label={`Ver detalles de ${product.title}`}
     >
       <div className="flex flex-row items-start gap-4 h-full">
         {/* IMAGEN IZQUIERDA FIJA */}
-        <Link
-          to={`/items/${product.id}`}
+        <div
           className="shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden w-[40%]"
           style={{ height: '196px', borderRadius: '4px' }}
         >
@@ -32,20 +34,19 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
             className="w-full h-full object-contain mix-blend-multiply"
             loading="lazy"
           />
-        </Link>
+        </div>
 
         {/* CONTENIDO */}
         <div className="flex-1 min-w-0 flex flex-col justify-between text-left">
           {/* TOP INFO */}
           <div className="text-left">
             {product.title && (
-              <Link
-                to={`/items/${product.id}`}
+              <h2
                 className="text-base font-medium text-gray-900 leading-tight mb-1 block text-left line-clamp-2"
                 title={product.title}
               >
                 {product.title}
-              </Link>
+              </h2>
             )}
 
             {product.formattedPrice && (
@@ -111,6 +112,6 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 });

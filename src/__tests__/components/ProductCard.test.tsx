@@ -74,10 +74,11 @@ describe('ProductCard', () => {
   it('navigates to product detail on click', () => {
     renderWithRouter(<ProductCard product={mockProduct} />);
 
-    const links = screen.getAllByRole('link', { name: /iPhone 13 Pro Max/i });
-    expect(links).toHaveLength(2);
-    links.forEach((link) => {
-      expect(link).toHaveAttribute('href', `/items/${mockProduct.id}`);
+    // Now the entire card is a link, so we expect one link with the product title in its accessible name
+    // The aria-label we added is `Ver detalles de ${product.title}`
+    const link = screen.getByRole('link', {
+      name: `Ver detalles de ${mockProduct.title}`,
     });
+    expect(link).toHaveAttribute('href', `/items/${mockProduct.id}`);
   });
 });
