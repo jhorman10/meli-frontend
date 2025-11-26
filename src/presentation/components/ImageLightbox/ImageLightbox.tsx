@@ -1,5 +1,5 @@
 import React from 'react';
-import { useImageLightbox } from './useImageLightbox';
+import { useImageLightbox } from '../../../application/hooks/useImageLightbox';
 
 interface ImageLightboxProps {
   images: { id: string; url: string }[];
