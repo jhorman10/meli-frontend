@@ -3,9 +3,13 @@ import '@testing-library/jest-dom';
 import { MainLayout } from '@/presentation/layouts/MainLayout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-// Mock SearchBar to avoid complex interactions in layout test
+// Mock SearchBar to capture onSearch prop
 jest.mock('@/presentation/components/SearchBar/SearchBar', () => ({
-  SearchBar: () => <div data-testid="search-bar">SearchBar</div>,
+  SearchBar: ({ onSearch }: { onSearch: (query: string) => void }) => (
+    <div data-testid="search-bar">
+      <button onClick={() => onSearch('iphone')}>Search</button>
+    </div>
+  ),
 }));
 
 // Mock useNavigate
@@ -57,5 +61,22 @@ describe('MainLayout', () => {
     fireEvent.click(logoButton);
 
     expect(mockNavigate).toHaveBeenCalledWith('/');
+  });
+
+  it('navigates to search results when search is submitted', () => {
+    render(
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<div>Home</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    );
+
+    const searchButton = screen.getByText('Search');
+    fireEvent.click(searchButton);
+
+    expect(mockNavigate).toHaveBeenCalledWith('/search?q=iphone');
   });
 });
