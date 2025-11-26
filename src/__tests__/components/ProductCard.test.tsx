@@ -40,8 +40,34 @@ describe('ProductCard', () => {
 
   it('shows free shipping text when freeShipping is true', () => {
     renderWithRouter(<ProductCard product={mockProduct} />);
+    const freeShippingElements = screen.getAllByText(
+      UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING
+    );
+    expect(freeShippingElements.length).toBeGreaterThan(0);
+  });
+
+  it('renders installments information correctly', () => {
+    renderWithRouter(<ProductCard product={mockProduct} />);
+
+    // Check for the new format: "Mismo precio en 12 cuotas de $ 125"
+    // We use a regex to match the text content flexibly
+    const expectedText = new RegExp(
+      `${UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}\\s+12\\s+${UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}\\s+\\$ 125`,
+      'i'
+    );
+
+    // Since there are multiple elements with installments info (old and new format),
+    // we just need to ensure the new format is present.
+    // getAllByText with regex will find elements containing the pattern.
+    const installmentsElements = screen.getAllByText(expectedText);
+    expect(installmentsElements.length).toBeGreaterThan(0);
+  });
+
+  it('renders discount badge correctly', () => {
+    const productWithDiscount = { ...mockProduct, discountPercentage: 15 };
+    renderWithRouter(<ProductCard product={productWithDiscount} />);
     expect(
-      screen.getByText(UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING)
+      screen.getByText(`15% ${UI_STRINGS.COMMON.OFF}`)
     ).toBeInTheDocument();
   });
 

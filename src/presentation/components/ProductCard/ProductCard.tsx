@@ -10,16 +10,21 @@ interface ProductCardProps {
 export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
   return (
     <div
-      className="bg-white shadow-sm border border-gray-200 p-5"
+      className="
+        bg-white shadow-sm border border-gray-200 p-4
+        h-[280px]           /* MOBILE */
+        md:h-auto           /* DESKTOP */
+        text-left
+      "
       style={{ borderRadius: '4px' }}
       role="listitem"
     >
-      <div className="flex flex-col md:flex-row md:items-start gap-4">
-        {/* Imagen del Producto */}
+      <div className="flex flex-row items-start gap-4 h-full">
+        {/* IMAGEN IZQUIERDA FIJA */}
         <Link
           to={`/items/${product.id}`}
-          className="shrink-0 w-32 h-32 bg-gray-50 overflow-hidden"
-          style={{ borderRadius: '4px' }}
+          className="shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden"
+          style={{ width: '196px', height: '196px', borderRadius: '4px' }}
         >
           <img
             src={product.thumbnail}
@@ -29,104 +34,86 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
           />
         </Link>
 
-        {/* Información del Producto */}
-        <div className="flex-1 min-w-0">
-          {/* Insignia de Marca */}
-          {product.title.toLowerCase().includes('apple') && (
-            <div className="mb-2">
-              <span
-                className="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100"
-                style={{ borderRadius: '2px' }}
+        {/* CONTENIDO */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between text-left">
+          {/* TOP INFO */}
+          <div className="text-left">
+            {product.title && (
+              <Link
+                to={`/items/${product.id}`}
+                className="text-base font-medium text-gray-900 leading-tight mb-1 block text-left"
               >
-                {UI_STRINGS.PRODUCT_CARD.APPLE_BADGE}
-              </span>
-            </div>
-          )}
+                {product.title}
+              </Link>
+            )}
 
-          {/* Título */}
-          <Link
-            to={`/items/${product.id}`}
-            className="text-lg font-medium text-gray-900 transition-colors line-clamp-2 mb-2"
-            style={{ color: 'inherit' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#3483fa')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'inherit')}
-          >
-            {product.title}
-          </Link>
+            {product.formattedPrice && (
+              <p className="text-2xl font-bold text-gray-900 mb-1 text-left">
+                {product.formattedPrice}
+              </p>
+            )}
 
-          {/* Sección de Precio */}
-          <div className="flex items-center gap-2 mb-2">
-            <p className="text-xl font-bold text-gray-900">
-              {product.formattedPrice}
-            </p>
+            {product.installments && (
+              <p className="text-sm text-green-700 mb-1 text-left">
+                {product.installments.quantity}x{' '}
+                {product.installments.formattedAmount}{' '}
+                {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}
+              </p>
+            )}
+
             {product.discountPercentage > 0 && (
-              <>
-                <span className="text-sm text-gray-500 line-through">
-                  {product.formattedOriginalPrice}
-                </span>
-                <span className="px-1.5 py-0.5 text-xs font-semibold text-green-700 bg-green-100 rounded">
-                  {product.discountPercentage}% {UI_STRINGS.COMMON.OFF}
-                </span>
-              </>
+              <span className="inline-block text-[12px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded mb-1 text-left">
+                {product.discountPercentage}% {UI_STRINGS.COMMON.OFF}
+              </span>
             )}
           </div>
 
-          {/* Calificación */}
-          {product.rating && (
-            <div className="flex items-center gap-1 mb-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className={`w-4 h-4 ${
-                      i < Math.floor(product.rating!.average)
-                        ? 'text-yellow-400'
-                        : 'text-gray-300'
-                    }`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-sm text-gray-600">
-                {product.rating.formattedAverage} ({product.rating.total})
-              </span>
-            </div>
-          )}
-
-          {/* Cuotas */}
-          {product.installments && (
-            <p className="text-sm text-gray-700 mb-1">
-              {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
-              {product.installments.quantity}{' '}
-              {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
-              {product.installments.formattedAmount}
-            </p>
-          )}
-
-          {/* Envío */}
-          {product.freeShipping && (
-            <div className="flex items-center gap-1 text-sm text-green-600">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                />
-              </svg>
-              <span className="font-medium">
+          {/* BOTTOM INFO */}
+          <div className="text-left">
+            {product.freeShipping && (
+              <p className="text-sm text-green-600 font-medium mb-1 text-left">
                 {UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING}
-              </span>
-            </div>
-          )}
+              </p>
+            )}
+
+            {product.condition && (
+              <p className="text-xs text-gray-600 mb-1 text-left">
+                {product.condition === 'new'
+                  ? UI_STRINGS.PRODUCT_CONDITIONS.NEW
+                  : UI_STRINGS.PRODUCT_CONDITIONS.USED}
+              </p>
+            )}
+
+            {product.installments && (
+              <p className="text-sm text-gray-700 mb-1">
+                {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
+                {product.installments.quantity}{' '}
+                {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
+                {product.installments.formattedAmount}
+              </p>
+            )}
+
+            {product.freeShipping && (
+              <div className="flex items-center gap-1 text-sm text-green-600">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  />
+                </svg>
+                <span className="font-medium">
+                  {UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
