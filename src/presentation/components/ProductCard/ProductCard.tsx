@@ -23,8 +23,8 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
         {/* IMAGEN IZQUIERDA FIJA */}
         <Link
           to={`/items/${product.id}`}
-          className="shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden"
-          style={{ width: '196px', height: '196px', borderRadius: '4px' }}
+          className="shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden w-[40%]"
+          style={{ height: '196px', borderRadius: '4px' }}
         >
           <img
             src={product.thumbnail}
@@ -71,12 +71,6 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
 
           {/* BOTTOM INFO */}
           <div className="text-left">
-            {product.freeShipping && (
-              <p className="text-sm text-green-600 font-medium mb-1 text-left truncate">
-                {UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING}
-              </p>
-            )}
-
             {product.condition && (
               <p className="text-xs text-gray-600 mb-1 text-left">
                 {product.condition === 'new'

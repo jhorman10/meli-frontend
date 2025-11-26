@@ -124,7 +124,7 @@ export const handlers = [
       id: product.id,
       title: product.title,
       price: product.price,
-      original_price: product.price * 1.2, // Mock original price
+      original_price: product.price * 1.2, // Precio original simulado
       currency_id: product.currency_id,
       available_quantity: 3,
       sold_quantity: 5,

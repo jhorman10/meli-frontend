@@ -151,7 +151,7 @@ describe('ProductGallery', () => {
     fireEvent.click(mainImageContainer!);
 
     // Check if lightbox is present (e.g., by checking for the close button)
-    const closeButton = screen.getByLabelText('Close lightbox');
+    const closeButton = screen.getByLabelText('Cerrar lightbox');
     expect(closeButton).toBeInTheDocument();
   });
 });

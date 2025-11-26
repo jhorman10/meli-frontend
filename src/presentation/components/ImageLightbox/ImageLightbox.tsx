@@ -24,11 +24,11 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm transition-opacity duration-300"
       onClick={onClose}
     >
-      {/* Close Button */}
+      {/* Botón de Cerrar */}
       <button
         className="absolute top-4 right-4 text-white hover:text-gray-300 z-50 p-2"
         onClick={onClose}
-        aria-label="Close lightbox"
+        aria-label="Cerrar lightbox"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -46,13 +46,13 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
         </svg>
       </button>
 
-      {/* Navigation Buttons */}
+      {/* Botones de Navegación */}
       {images.length > 1 && (
         <>
           <button
             className="absolute left-2 md:left-4 text-white hover:text-gray-300 z-50 p-3 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm transition-colors"
             onClick={handlePrev}
-            aria-label="Previous image"
+            aria-label="Imagen anterior"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
           <button
             className="absolute right-2 md:right-4 text-white hover:text-gray-300 z-50 p-3 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm transition-colors"
             onClick={handleNext}
-            aria-label="Next image"
+            aria-label="Siguiente imagen"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
         </>
       )}
 
-      {/* Image Container */}
+      {/* Contenedor de Imagen */}
       <div
         className="relative w-full h-full flex items-center justify-center p-4"
         onClick={(e) => e.stopPropagation()}
@@ -109,14 +109,14 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
         >
           <img
             src={images[currentIndex].url}
-            alt={`Product view ${currentIndex + 1}`}
+            alt={`Vista de producto ${currentIndex + 1}`}
             className="max-h-[90vh] max-w-[90vw] object-contain select-none"
             draggable={false}
           />
         </div>
       </div>
 
-      {/* Image Counter */}
+      {/* Contador de Imágenes */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
         {currentIndex + 1} / {images.length}
       </div>

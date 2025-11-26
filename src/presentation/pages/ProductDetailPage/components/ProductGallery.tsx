@@ -20,7 +20,7 @@ export const ProductGallery = React.memo<ProductGalleryProps>(
       [pictures]
     );
 
-    // Determine current image index for lightbox
+    // Determinar índice de imagen actual para el lightbox
     const currentImageIndex = React.useMemo(() => {
       const currentId = selectedImage?.id;
       if (!currentId) return 0;
