@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
+import { useImageLightbox } from './useImageLightbox';
 
 interface ImageLightboxProps {
   images: { id: string; url: string }[];
@@ -11,56 +12,12 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
   initialIndex,
   onClose,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const [isZoomed, setIsZoomed] = useState(false);
-
-  // Lock body scroll on mount
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
-  const handleNext = useCallback(
-    (e?: React.MouseEvent) => {
-      e?.stopPropagation();
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-      setIsZoomed(false);
-    },
-    [images.length]
-  );
-
-  const handlePrev = useCallback(
-    (e?: React.MouseEvent) => {
-      e?.stopPropagation();
-      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-      setIsZoomed(false);
-    },
-    [images.length]
-  );
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'Escape':
-          onClose();
-          break;
-        case 'ArrowRight':
-          handleNext();
-          break;
-        case 'ArrowLeft':
-          handlePrev();
-          break;
-      }
-    },
-    [onClose, handleNext, handlePrev]
-  );
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+  const { currentIndex, isZoomed, handleNext, handlePrev, toggleZoom } =
+    useImageLightbox({
+      images,
+      initialIndex,
+      onClose,
+    });
 
   return (
     <div
@@ -144,7 +101,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
           className={`relative transition-transform duration-300 ease-out cursor-zoom-in ${
             isZoomed ? 'cursor-zoom-out scale-150' : ''
           }`}
-          onClick={() => setIsZoomed(!isZoomed)}
+          onClick={toggleZoom}
           style={{
             maxWidth: isZoomed ? 'none' : '100%',
             maxHeight: isZoomed ? 'none' : '100%',
