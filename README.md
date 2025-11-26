@@ -172,7 +172,7 @@ src/
 │   ├─ api/              # Clientes HTTP (ProductAPI)
 │   └─ mocks/            # Mock Service Worker handlers
 ├─ presentation/
-│   ├─ components/       # UI reusable (SearchBar, ProductCard, SEO, …)
+│   ├─ components/       # UI reusable (SearchBar, ProductCard, ImageLightbox, …)
 │   ├─ layouts/          # Layouts globales (MainLayout)
 │   ├─ pages/            # SearchPage, SearchResultsPage, ProductDetailPage
 │   └─ router/           # Configuración de rutas (AppRouter)
@@ -188,18 +188,19 @@ src/
 
 ### 🔍 **Búsqueda y Resultados**
 
-| 📋 Componente     | 📝 Descripción                                                 |
-| ----------------- | -------------------------------------------------------------- |
-| **SearchBar**     | Input controlado con debounce y validación de longitud mínima. |
-| **SearchResults** | Lista paginada (simulada) de productos con vista previa.       |
-| **SEO**           | Gestión de meta tags dinámicos con `react-helmet-async`.       |
+| 📋 Componente     | 📝 Descripción                                                             |
+| ----------------- | -------------------------------------------------------------------------- |
+| **SearchBar**     | Input controlado con debounce y validación de longitud mínima.             |
+| **SearchResults** | Lista paginada de productos con vista previa rica (precio, cuotas, envío). |
+| **SEO**           | Gestión de meta tags dinámicos con `react-helmet-async`.                   |
 
 ### 🛍️ **Detalle de Producto**
 
-- **Galería:** Visualización de imagen principal y miniaturas.
-- **Información:** Precio formateado, condición (nuevo/usado), cantidad vendida.
-- **Descripción:** Texto completo del producto.
+- **Galería:** Visualización de imagen principal y miniaturas con **Lightbox** para zoom.
+- **Información:** Precio formateado, cuotas, descuento, condición y envío.
+- **Descripción:** Texto completo del producto con soporte para saltos de línea.
 - **Breadcrumbs:** Navegación contextual basada en categorías.
+- **Arquitectura Modular:** Dividido en subcomponentes (`ProductHeader`, `ProductPrice`, `ProductDescription`, etc.) para facilitar el mantenimiento.
 
 ---
 
