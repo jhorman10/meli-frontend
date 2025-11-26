@@ -12,7 +12,7 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
     <div
       className="
         bg-white shadow-sm border border-gray-200 p-4
-        h-[280px]           /* MOBILE */
+        h-[250px]           /* MOBILE */
         md:h-auto           /* DESKTOP */
         text-left
       "
@@ -41,7 +41,8 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
             {product.title && (
               <Link
                 to={`/items/${product.id}`}
-                className="text-base font-medium text-gray-900 leading-tight mb-1 block text-left"
+                className="text-base font-medium text-gray-900 leading-tight mb-1 block text-left line-clamp-2"
+                title={product.title}
               >
                 {product.title}
               </Link>
@@ -54,7 +55,7 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
             )}
 
             {product.installments && (
-              <p className="text-sm text-green-700 mb-1 text-left">
+              <p className="text-sm text-green-700 mb-1 text-left truncate">
                 {product.installments.quantity}x{' '}
                 {product.installments.formattedAmount}{' '}
                 {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}
@@ -71,7 +72,7 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
           {/* BOTTOM INFO */}
           <div className="text-left">
             {product.freeShipping && (
-              <p className="text-sm text-green-600 font-medium mb-1 text-left">
+              <p className="text-sm text-green-600 font-medium mb-1 text-left truncate">
                 {UI_STRINGS.PRODUCT_CARD.FREE_SHIPPING}
               </p>
             )}
@@ -85,7 +86,7 @@ export const ProductCard = React.memo<ProductCardProps>(({ product }) => {
             )}
 
             {product.installments && (
-              <p className="text-sm text-gray-700 mb-1">
+              <p className="text-sm text-gray-700 mb-1 truncate">
                 {UI_STRINGS.PRODUCT_DETAIL.PRICING.SAME_PRICE_IN}{' '}
                 {product.installments.quantity}{' '}
                 {UI_STRINGS.PRODUCT_DETAIL.PRICING.INSTALLMENTS_OF}{' '}
