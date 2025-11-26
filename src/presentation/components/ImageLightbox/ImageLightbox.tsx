@@ -93,13 +93,13 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
       {images.length > 1 && (
         <>
           <button
-            className="absolute left-4 text-white hover:text-gray-300 z-50 p-2 hidden md:block"
+            className="absolute left-2 md:left-4 text-white hover:text-gray-300 z-50 p-3 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm transition-colors"
             onClick={handlePrev}
             aria-label="Previous image"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10"
+              className="h-8 w-8 md:h-10 md:w-10"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -113,13 +113,13 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
             </svg>
           </button>
           <button
-            className="absolute right-4 text-white hover:text-gray-300 z-50 p-2 hidden md:block"
+            className="absolute right-2 md:right-4 text-white hover:text-gray-300 z-50 p-3 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm transition-colors"
             onClick={handleNext}
             aria-label="Next image"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10"
+              className="h-8 w-8 md:h-10 md:w-10"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
